@@ -19,7 +19,7 @@
     {% for humidity in object_list %}
     <tr>
         <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ humidity.humidity }} </td>
+        <td>{{ humidity.value }} </td>
         <td>{{ humidity.date_time.date|date:"d M Y" }}</td>
         <td>{{ humidity.date_time.time|date:"G:i" }}</td>
         <td>

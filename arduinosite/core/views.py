@@ -20,6 +20,7 @@ def home_page(request):
         'last_temperature': last_temperature,
         'current_time': current_time,
         'last_humidity': last_humidity,
-        'is_temp_higher': is_temp_higher
+        'is_temp_higher': is_temp_higher,
+        'is_humidity_higher': is_humidity_higher,
         }
     return render(request, 'home.html', context)

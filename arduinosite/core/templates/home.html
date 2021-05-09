@@ -17,12 +17,12 @@
         <div class="jumbotron jumbotron-fluid col-md-4 offset-md-1 text-center" >
             <h1 class="display-3">Last temperature</h1>
             <h1 class="display-3">
-                {% if last_temperature.temperature > 21 %}
+                {% if last_temperature.value >= 20 %}
                 {% bs_icon 'thermometer-sun' size='1em' %}
                 {% else %}
                 {% bs_icon 'thermometer-snow' size='1em' %}
                 {% endif %}
-                {{ last_temperature.temperature }}°C
+                {{ last_temperature.value }}°C
                 {% if is_temp_higher %}
                 {% bs_icon 'arrow-up-circle-fill' size='1em' %}
                 {% else %}
@@ -38,7 +38,12 @@
             <h1 class="display-3">Last humidity</h1>
             <h1 class="display-3">
                 {% bs_icon 'moisture' size='1em' %}
-                {{ last_humidity.humidity }}%
+                {{ last_humidity.value }}%
+                {% if is_humidity_higher %}
+                {% bs_icon 'arrow-up-circle-fill' size='1em' %}
+                {% else %}
+                {% bs_icon 'arrow-down-circle-fill' size='1em' %}
+                {% endif %}
             </h1>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">See all</a>

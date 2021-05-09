@@ -19,7 +19,7 @@ class TemperatureListView(ListView):
         url = 'http://192.168.1.16/t'
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
-        self.model.objects.create(temperature=n)        
+        self.model.objects.create(value=n)        
         return HttpResponseRedirect(self.request.path)
     
 class TemperatureDeleteView(DeleteView):
@@ -35,7 +35,7 @@ class HumidityListView(ListView):
         url = 'http://192.168.1.16/h'
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
-        self.model.objects.create(humidity=n)        
+        self.model.objects.create(value=n)
         return HttpResponseRedirect(self.request.path)
     
 class HumidityDeleteView(DeleteView):

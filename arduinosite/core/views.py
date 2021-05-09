@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.template import loader
 
@@ -24,3 +24,7 @@ def home_page(request):
         'is_humidity_higher': is_humidity_higher,
         }
     return render(request, 'home.html', context)
+
+def get_temperature(request):
+    Temperature.get_temperature()
+    return redirect('core:home')

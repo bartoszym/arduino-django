@@ -24,11 +24,12 @@ class Temperature(models.Model):
     value = models.FloatField()
     date_time = models.DateTimeField(auto_now=True)
     
-    def get_temperature(self):
+    @classmethod
+    def get_temperature(cls):
         url = 'http://192.168.1.16/t'
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
-        self.model.objects.create(value=n)
+        cls.objects.create(value=n)
         return
     
     def __str__(self):
@@ -45,11 +46,12 @@ class Humidity(models.Model):
     value = models.FloatField()
     date_time = models.DateTimeField(auto_now=True)
     
-    def get_humidity(self):
+    @classmethod
+    def get_humidity(cls):
         url = 'http://192.168.1.16/h'
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
-        self.model.objects.create(value=n)
+        cls.objects.create(value=n)
         return
     
     def __str__(self):

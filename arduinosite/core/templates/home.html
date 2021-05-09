@@ -29,6 +29,13 @@
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
+            <!-- <form method="POST" value='get_temp' action="#">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Pobierz aktualną wilgotność</button>
+            </form> -->
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'core:get-temperature' %}" role="button">Get temperature</a>
+            </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">See all</a>
             </p>

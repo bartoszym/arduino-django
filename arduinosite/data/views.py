@@ -15,7 +15,7 @@ class TemperatureListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        self.model.get_temperature(self)
+        self.model.get_temperature()
         return HttpResponseRedirect(self.request.path)
     
 class TemperatureDeleteView(DeleteView):
@@ -27,7 +27,7 @@ class HumidityListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        self.model.get_humidity(self)
+        self.model.get_humidity()
         return HttpResponseRedirect(self.request.path)
     
 class HumidityDeleteView(DeleteView):

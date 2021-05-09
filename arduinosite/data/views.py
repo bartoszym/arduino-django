@@ -15,29 +15,21 @@ class TemperatureListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        print(self.request.path)
-        url = 'http://192.168.1.16/t'
-        n = urllib.request.urlopen(url).read()
-        n = n.decode("utf-8")
-        self.model.objects.create(value=n)        
+        self.model.get_temperature(self)
         return HttpResponseRedirect(self.request.path)
     
 class TemperatureDeleteView(DeleteView):
     model = Temperature
-    success_url = reverse_lazy('temperature-list')
+    success_url = reverse_lazy('data:temperature-list')
         
 class HumidityListView(ListView):
     model = Humidity
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        print(self.request.path)
-        url = 'http://192.168.1.16/h'
-        n = urllib.request.urlopen(url).read()
-        n = n.decode("utf-8")
-        self.model.objects.create(value=n)
+        self.model.get_humidity(self)
         return HttpResponseRedirect(self.request.path)
     
 class HumidityDeleteView(DeleteView):
     model = Humidity
-    success_url = reverse_lazy('humidity-list')
+    success_url = reverse_lazy('data:humidity-list')

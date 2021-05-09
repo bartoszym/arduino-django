@@ -27,6 +27,13 @@ class Temperature(models.Model):
     def __str__(self):
         return f'Temperatura {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
+    def get_temperature(self):
+        url = 'http://192.168.1.16/t'
+        n = urllib.request.urlopen(url).read()
+        n = n.decode("utf-8")
+        self.model.objects.create(value=n)
+        return
+    
     objects = DataManager()
     
 
@@ -37,6 +44,13 @@ class Humidity(models.Model):
         verbose_name_plural = 'humidities'
     value = models.FloatField()
     date_time = models.DateTimeField(auto_now=True)
+    
+    def get_humidity(self):
+        url = 'http://192.168.1.16/h'
+        n = urllib.request.urlopen(url).read()
+        n = n.decode("utf-8")
+        self.model.objects.create(value=n)
+        return
     
     def __str__(self):
         return f'Wilgotność {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'

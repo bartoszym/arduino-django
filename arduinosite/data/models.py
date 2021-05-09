@@ -23,9 +23,6 @@ class Temperature(models.Model):
         get_latest_by = ['-date_time']
     value = models.FloatField()
     date_time = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f'Temperatura {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
     def get_temperature(self):
         url = 'http://192.168.1.16/t'
@@ -33,6 +30,9 @@ class Temperature(models.Model):
         n = n.decode("utf-8")
         self.model.objects.create(value=n)
         return
+    
+    def __str__(self):
+        return f'Temperatura {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
     objects = DataManager()
     

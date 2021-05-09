@@ -18,7 +18,7 @@
 <tbody>
     {% for temperature in object_list %}
     <tr>
-        <th scope="row">{{ forloop.counter }}</th>
+        <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
         <td>{{ temperature.value }} </td>
         <td>{{ temperature.date_time.date|date:"d M Y" }}</td>
         <td>{{ temperature.date_time.time|date:"G:i" }}</td>

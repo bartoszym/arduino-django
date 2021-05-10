@@ -4,7 +4,7 @@ from django.template import loader
 
 from datetime import datetime
 
-from data.models import Temperature, Humidity
+from data.models import Temperature, Humidity, Lightness
 
 
 class HomePageView(TemplateView):
@@ -12,9 +12,11 @@ class HomePageView(TemplateView):
     
 def home_page(request):
     last_temperature = Temperature.objects.latest('date_time')
+    last_humidity = Humidity.objects.latest('date_time')
+    last_lightness = Lightness.objects.latest('date_time')
     temperature_week_average = Temperature.objects.get_last_week_average()
     humidity_week_average = Humidity.objects.get_last_week_average()
-    last_humidity = Humidity.objects.latest('date_time')
+    lightness_week_average = Lightness.objects.get_last_week_average()
     current_time = datetime.utcnow()
     context = {
         'last_temperature': last_temperature,
@@ -22,6 +24,8 @@ def home_page(request):
         'last_humidity': last_humidity,
         'temperature_week_average': temperature_week_average,
         'humidity_week_average': humidity_week_average,
+        'last_lightness': last_lightness,
+        'lightness_week_average': lightness_week_average
         }
     return render(request, 'home.html', context)
 
@@ -31,4 +35,8 @@ def get_temperature(request):
 
 def get_humidity(request):
     Humidity.get_humidity()
+    return redirect('core:home')
+
+def get_lightness(request):
+    Lightness.get_lightness()
     return redirect('core:home')

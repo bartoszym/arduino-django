@@ -1,8 +1,6 @@
 from django.db import models
-from django.utils import timezone
 
 from datetime import datetime, timedelta
-
 import urllib.request
 
 
@@ -24,8 +22,8 @@ class Temperature(models.Model):
     
     @classmethod
     def get_temperature(cls):
-        # url = 'http://192.168.1.16/t' # adres dom
-        url = 'http://192.168.0.109/t' # adres Domi
+        url = 'http://192.168.1.16/t' # adres dom
+        # url = 'http://192.168.0.109/t' # adres Domi
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
         cls.objects.create(value=n)
@@ -47,8 +45,8 @@ class Humidity(models.Model):
     
     @classmethod
     def get_humidity(cls):
-        # url = 'http://192.168.1.16/h' # adres dom
-        url = 'http://192.168.0.109/h' # adres Domi
+        url = 'http://192.168.1.16/h' # adres dom
+        # url = 'http://192.168.0.109/h' # adres Domi
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
         cls.objects.create(value=n)
@@ -56,5 +54,27 @@ class Humidity(models.Model):
     
     def __str__(self):
         return f'Wilgotność {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
+    
+    objects = DataManager()
+    
+
+class Lightness(models.Model):
+    class Meta:
+        ordering = ['-date_time']
+        get_latest_by = ['-date_time']
+    value = models.FloatField()
+    date_time = models.DateTimeField(auto_now=True)
+        
+    @classmethod
+    def get_lightness(cls):
+        url = 'http://192.168.1.16/l' # adres dom
+        # url = 'http://192.168.0.109/l' # adres Domi
+        n = urllib.request.urlopen(url).read()
+        n = n.decode("utf-8")
+        cls.objects.create(value=n)
+        return
+    
+    def __str__(self):
+        return f'Jasność {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
     objects = DataManager()

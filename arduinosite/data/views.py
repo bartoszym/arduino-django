@@ -5,7 +5,7 @@ from django.views.generic import ListView, DeleteView
 
 import urllib.request
 
-from .models import Temperature, Humidity
+from .models import Temperature, Humidity, Lightness
 
 def index(request):
     return HttpResponse("Hello world")
@@ -33,3 +33,15 @@ class HumidityListView(ListView):
 class HumidityDeleteView(DeleteView):
     model = Humidity
     success_url = reverse_lazy('data:humidity-list')
+
+class LightnessListView(ListView):
+    model = Lightness
+    paginate_by = 10
+    
+    def post(self, request, *args, **kwargs):
+        self.model.get_lightness()
+        return HttpResponseRedirect(self.request.path)
+    
+class LightnessDeleteView(DeleteView):
+    model = Lightness
+    success_url = reverse_lazy('data:lightness-list')

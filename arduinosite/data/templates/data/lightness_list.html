@@ -2,15 +2,15 @@
 {% load tz %}
 {% block header %}
 <div class="jumbotron" style="padding: 2%; margin: 10px;">
-    <h1 class="display-6">Temperatures</h1>
+    <h1 class="display-6">Lightnesses</h1>
 </div>
 {% endblock header %}
 {% block content %}
-<div>
+<div id='table'>
 <table class="table table-striped table-hover">
 <thead>
     <th scope="col">#</th>
-    <th scope="col">temperature</th>
+    <th scope="col">lightness</th>
     <th scope="col">day</th>
     <th scope="col">time</th>
     <th scope="col"></th>
@@ -18,7 +18,7 @@
 {% include "data/values_table.html" with object_list=object_list %}
 <form method="POST" value='get_temp'>
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Get current temperature</button>
+    <button type="submit" class="btn btn-success">Get current lightness</button>
 </form>
 </div>
 {% endblock %}

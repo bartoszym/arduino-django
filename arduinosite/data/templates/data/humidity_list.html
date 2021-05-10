@@ -24,7 +24,7 @@
         <td>{{ humidity.date_time.date|date:"d M Y" }}</td>
         <td>{{ humidity.date_time.time|date:"G:i" }}</td>
         <td>
-            <a href="{% url 'data:humidity-delete' humidity.id %}"><button type="submit" class="btn btn-danger">Usuń</button></a>
+            <a href="{% url 'data:humidity-delete' humidity.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
         </td>
     </tr>
     {% endfor %}
@@ -70,7 +70,7 @@
 </div>
 <form method="POST" value='get_temp'>
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Pobierz aktualną wilgotność</button>
+    <button type="submit" class="btn btn-success">Get current humidity</button>
 </form>
 </div>
 {% endblock %}

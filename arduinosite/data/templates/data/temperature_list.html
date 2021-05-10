@@ -23,7 +23,7 @@
         <td>{{ temperature.date_time.date|date:"d M Y" }}</td>
         <td>{{ temperature.date_time.time|date:"G:i" }}</td>
         <td>
-            <a href="{% url 'data:temperature-delete' temperature.id %}"><button type="submit" class="btn btn-danger">Usuń</button></a>
+            <a href="{% url 'data:temperature-delete' temperature.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
         </td>
     </tr>
     {% endfor %}
@@ -69,7 +69,7 @@
 </div>
 <form method="POST" value='get_temp'>
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Pobierz aktualną temperaturę</button>
+    <button type="submit" class="btn btn-success">Get current temperature</button>
 </form>
 </div>
 {% endblock %}

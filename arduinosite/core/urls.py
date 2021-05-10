@@ -6,4 +6,5 @@ urlpatterns = [
     # path('', HomePageView.as_view(), name='home'),
     path('', home_page, name='home'),
     path('get_temperature/', get_temperature, name='get-temperature'),
+    path('get_humidity/', get_humidity, name='get-humidity'),
 ]

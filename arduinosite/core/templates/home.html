@@ -23,18 +23,16 @@
                 {% bs_icon 'thermometer-snow' size='1em' %}
                 {% endif %}
                 {{ last_temperature.value }}°C
-                {% if is_temp_higher %}
+                {% if last_temperature.value > temperature_week_average %}
                 {% bs_icon 'arrow-up-circle-fill' size='1em' %}
                 {% else %}
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
-            <!-- <form method="POST" value='get_temp' action="#">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-success">Pobierz aktualną wilgotność</button>
-            </form> -->
+            <h3>Updated: {{ last_temperature.date_time.date|date:'j M' }}, {{ last_temperature.date_time.time|date:'G:i' }}</h3>
+            <h2>Last week average: {{ temperature_week_average|floatformat:1 }}°C</h2>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'core:get-temperature' %}" role="button">Get temperature</a>
+                <a class="btn btn-success btn-lg" href="{% url 'core:get-temperature' %}" role="button">Get current temperature</a>
             </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">See all</a>
@@ -46,12 +44,17 @@
             <h1 class="display-3">
                 {% bs_icon 'moisture' size='1em' %}
                 {{ last_humidity.value }}%
-                {% if is_humidity_higher %}
+                {% if last_humidity.value > humidity_week_average %}
                 {% bs_icon 'arrow-up-circle-fill' size='1em' %}
                 {% else %}
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
+            <h3>Updated: {{ last_humidity.date_time.date|date:'j M' }}, {{ last_humidity.date_time.time|date:'G:i' }}</h3>
+            <h2>Last week average: {{ humidity_week_average|floatformat:1 }}%</h2>
+            <p class="lead">
+                <a class="btn btn-success btn-lg" href="{% url 'core:get-humidity' %}" role="button">Get current humidity</a>
+            </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">See all</a>
             </p>

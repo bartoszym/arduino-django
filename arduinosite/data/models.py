@@ -7,14 +7,12 @@ import urllib.request
 
 
 class DataManager(models.Manager):
-    def is_last_higher_than_next_week(self):
-        last_value = self.model.objects.latest().value
+    def get_last_week_average(self):
         time_now = datetime.utcnow()
         seven_days_ago = time_now - timedelta(days=7)
         last_weeks = self.model.objects.filter(date_time__gte=seven_days_ago)
-        mean_values_last_week = last_weeks.aggregate(models.Avg('value'))['value__avg']
-        print(mean_values_last_week)
-        return True if last_value > mean_values_last_week else False
+        mean_value_last_week = last_weeks.aggregate(models.Avg('value'))['value__avg']
+        return mean_value_last_week
 
 
 class Temperature(models.Model):
@@ -26,7 +24,8 @@ class Temperature(models.Model):
     
     @classmethod
     def get_temperature(cls):
-        url = 'http://192.168.1.16/t'
+        # url = 'http://192.168.1.16/t' # adres dom
+        url = 'http://192.168.0.109/t' # adres Domi
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
         cls.objects.create(value=n)
@@ -48,7 +47,8 @@ class Humidity(models.Model):
     
     @classmethod
     def get_humidity(cls):
-        url = 'http://192.168.1.16/h'
+        # url = 'http://192.168.1.16/h' # adres dom
+        url = 'http://192.168.0.109/h' # adres Domi
         n = urllib.request.urlopen(url).read()
         n = n.decode("utf-8")
         cls.objects.create(value=n)

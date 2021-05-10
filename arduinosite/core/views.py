@@ -12,19 +12,23 @@ class HomePageView(TemplateView):
     
 def home_page(request):
     last_temperature = Temperature.objects.latest('date_time')
-    is_temp_higher = Temperature.objects.is_last_higher_than_next_week()
-    is_humidity_higher = Humidity.objects.is_last_higher_than_next_week()
+    temperature_week_average = Temperature.objects.get_last_week_average()
+    humidity_week_average = Humidity.objects.get_last_week_average()
     last_humidity = Humidity.objects.latest('date_time')
     current_time = datetime.utcnow()
     context = {
         'last_temperature': last_temperature,
         'current_time': current_time,
         'last_humidity': last_humidity,
-        'is_temp_higher': is_temp_higher,
-        'is_humidity_higher': is_humidity_higher,
+        'temperature_week_average': temperature_week_average,
+        'humidity_week_average': humidity_week_average,
         }
     return render(request, 'home.html', context)
 
 def get_temperature(request):
     Temperature.get_temperature()
+    return redirect('core:home')
+
+def get_humidity(request):
+    Humidity.get_humidity()
     return redirect('core:home')

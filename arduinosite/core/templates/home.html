@@ -2,8 +2,18 @@
 {% load bootstrap_icons %}
 {% block header %}
 <div class="jumbotron">
-    <h1 class="display-4">Hello, User</h1>
-    <p class="lead">Today is {{ current_time|date:'l ' }}, {{ current_time|date:'j E Y'}}. </p>
+    <h1 class="display-4">
+        {% if current_time|date:'G' < 12 %}
+        Good morning, 
+        {% elif current_time|date:'G' < 19 %}
+        Good afternoon,
+        {% else %}
+        Good evening,
+        {% endif %}
+        User
+    </h1>
+    
+    <p class="lead">Today is {{ current_time|date:'l' }}, {{ current_time|date:'j E Y'}}. </p>
     <hr class="my-4">
     <p>
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
@@ -63,7 +73,11 @@
         <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
             <h1 class="display-3">Last lightness</h1>
             <h1 class="display-3">
-                <!-- {% bs_icon 'moisture' size='1em' %} -->
+                {% if last_lightness.value >= 100 %}
+                {% bs_icon 'sun' size='1em' %}
+                {% else %}
+                {% bs_icon 'moon-fill' size='1em' %}
+                {% endif %}
                 {{ last_lightness.value }} lx
                 {% if last_lightness.value > lightness_week_average %}
                 {% bs_icon 'arrow-up-circle-fill' size='1em' %}

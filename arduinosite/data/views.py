@@ -20,6 +20,7 @@ class TemperatureListView(ListView):
     
 class TemperatureDeleteView(DeleteView):
     model = Temperature
+    template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:temperature-list')
         
 class HumidityListView(ListView):
@@ -32,6 +33,7 @@ class HumidityListView(ListView):
     
 class HumidityDeleteView(DeleteView):
     model = Humidity
+    template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:humidity-list')
 
 class LightnessListView(ListView):
@@ -44,4 +46,5 @@ class LightnessListView(ListView):
     
 class LightnessDeleteView(DeleteView):
     model = Lightness
+    template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:lightness-list')

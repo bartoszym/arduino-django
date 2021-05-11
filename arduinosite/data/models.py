@@ -13,12 +13,18 @@ class DataManager(models.Manager):
         return mean_value_last_week
 
 
-class Temperature(models.Model):
-    class Meta:
-        ordering = ['-date_time']
-        get_latest_by = ['-date_time']
+class Data(models.Model):
     value = models.FloatField()
     date_time = models.DateTimeField(auto_now=True)
+    class Meta:
+        abstract = True
+        ordering = ['-date_time']
+        get_latest_by = ['-date_time']
+
+    objects = DataManager()
+    
+
+class Temperature(Data):
     
     @classmethod
     def get_temperature(cls):
@@ -32,16 +38,8 @@ class Temperature(models.Model):
     def __str__(self):
         return f'Temperatura {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
-    objects = DataManager()
-    
 
-class Humidity(models.Model):
-    class Meta:
-        ordering = ['-date_time']
-        get_latest_by = ['-date_time']
-        verbose_name_plural = 'humidities'
-    value = models.FloatField()
-    date_time = models.DateTimeField(auto_now=True)
+class Humidity(Data):
     
     @classmethod
     def get_humidity(cls):
@@ -55,15 +53,11 @@ class Humidity(models.Model):
     def __str__(self):
         return f'Wilgotność {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
     
-    objects = DataManager()
-    
+    class Meta(Data.Meta):
+        verbose_name_plural = 'humidities'
+        
 
-class Lightness(models.Model):
-    class Meta:
-        ordering = ['-date_time']
-        get_latest_by = ['-date_time']
-    value = models.FloatField()
-    date_time = models.DateTimeField(auto_now=True)
+class Lightness(Data):
         
     @classmethod
     def get_lightness(cls):
@@ -76,5 +70,3 @@ class Lightness(models.Model):
     
     def __str__(self):
         return f'Jasność {self.value} dnia {self.date_time.date()} o godz. {self.date_time.time()}'
-    
-    objects = DataManager()

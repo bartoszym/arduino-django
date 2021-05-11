@@ -1,3 +1,4 @@
+{% load i18n %}
 <tbody>
     {% for object in object_list %}
     <tr>
@@ -8,12 +9,13 @@
         <td>{{ object.date_time.time|date:"G:i" }}</td>
         <td>
             {% if 'temperatures' in request.path %}
-            <a href="{% url 'data:temperature-delete' object.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'data:temperature-delete' object.id %}">
             {% elif 'humidities' in request.path %}
-            <a href="{% url 'data:humidity-delete' object.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'data:humidity-delete' object.id %}">
             {% elif 'lightnesses' in request.path %}
-            <a href="{% url 'data:lightness-delete' object.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'data:lightness-delete' object.id %}">
             {%  endif %}
+            <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button></a>
         </td>
     </tr>
     {% endfor %}

@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-11 23:46+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: templates/base.html:9
+msgid "Control your Home"
+msgstr ""
+
+#: templates/base.html:18
+msgid "Main page"
+msgstr "Strona główna"
+
+#: templates/base.html:25
+msgid "Temperatures"
+msgstr "Temperatury"
+
+#: templates/base.html:28
+msgid "Humidities"
+msgstr "Wilgotność"
+
+#: templates/base.html:31
+msgid "Lightnesses"
+msgstr "Jasność"
+
+#: templates/home.html:8
+msgid "Good morning"
+msgstr "Dzień dobry"
+
+#: templates/home.html:10
+msgid "Good afternoon"
+msgstr "Witaj"
+
+#: templates/home.html:12
+msgid "Good evening"
+msgstr "Dobry wieczór"
+
+#: templates/home.html:17
+msgid "Today is"
+msgstr "Dziś jest"
+
+#: templates/home.html:29
+msgid "Last temperature"
+msgstr "Ostatnia temperatura"
+
+#: templates/home.html:43 templates/home.html:64 templates/home.html:89
+msgid "Updated:"
+msgstr "Zaktualizowano:"
+
+#: templates/home.html:44 templates/home.html:65 templates/home.html:90
+msgid "Last week average:"
+msgstr "Średnia zeszłego tygodnia:"
+
+#: templates/home.html:46
+msgid "Get current temperature"
+msgstr "Pobierz aktualną temperaturę"
+
+#: templates/home.html:49 templates/home.html:70 templates/home.html:95
+msgid "See all"
+msgstr "Pokaż wszystkie"
+
+#: templates/home.html:54
+msgid "Last humidity"
+msgstr "Ostatnia wilgotność"
+
+#: templates/home.html:67
+msgid "Get current humidity"
+msgstr "Pobierz aktualną wilgotność"
+
+#: templates/home.html:75
+msgid "Last lightness"
+msgstr "Ostatnia jasność"
+
+#: templates/home.html:92
+msgid "Get current lightness"
+msgstr "Pobierz aktualną jasność"

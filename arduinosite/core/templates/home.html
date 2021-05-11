@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% load bootstrap_icons %}
+{% load i18n %}
 {% block header %}
 <div class="jumbotron">
     <h1 class="display-4">
         {% if current_time|date:'G' < 12 %}
-        Good morning, 
+        {% trans 'Good morning' %},
         {% elif current_time|date:'G' < 19 %}
-        Good afternoon,
+        {% trans 'Good afternoon' %},
         {% else %}
-        Good evening,
+        {% trans 'Good evening' %},
         {% endif %}
         User
     </h1>
     
-    <p class="lead">Today is {{ current_time|date:'l' }}, {{ current_time|date:'j E Y'}}. </p>
+    <p class="lead">{% trans 'Today is' %} {{ current_time|date:'l' }}, {{ current_time|date:'j E Y'}}. </p>
     <hr class="my-4">
     <p>
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
@@ -25,7 +26,7 @@
 <div>
     <div class="container-fluid " style="display: inline-flex;">
         <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
-            <h1 class="display-3">Last temperature</h1>
+            <h1 class="display-3">{% trans 'Last temperature' %}</h1>
             <h1 class="display-3">
                 {% if last_temperature.value >= 20 %}
                 {% bs_icon 'thermometer-sun' size='1em' %}
@@ -39,18 +40,18 @@
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
-            <h3>Updated: {{ last_temperature.date_time.date|date:'j M' }}, {{ last_temperature.date_time.time|date:'G:i' }}</h3>
-            <h2>Last week average: {{ temperature_week_average|floatformat:1 }}°C</h2>
+            <h3>{% trans 'Updated:' %} {{ last_temperature.date_time.date|date:'j M' }}, {{ last_temperature.date_time.time|date:'G:i' }}</h3>
+            <h2>{% trans 'Last week average:' %} {{ temperature_week_average|floatformat:1 }}°C</h2>
             <p class="lead">
-                <a class="btn btn-success btn-lg" href="{% url 'core:get-temperature' %}" role="button">Get current temperature</a>
+                <a class="btn btn-success btn-lg" href="{% url 'core:get-temperature' %}" role="button">{% trans 'Get current temperature' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">See all</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
 
         <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
-            <h1 class="display-3">Last humidity</h1>
+            <h1 class="display-3">{% trans 'Last humidity' %}</h1>
             <h1 class="display-3">
                 {% bs_icon 'moisture' size='1em' %}
                 {{ last_humidity.value }}%
@@ -60,18 +61,18 @@
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
-            <h3>Updated: {{ last_humidity.date_time.date|date:'j M' }}, {{ last_humidity.date_time.time|date:'G:i' }}</h3>
-            <h2>Last week average: {{ humidity_week_average|floatformat:1 }}%</h2>
+            <h3>{% trans 'Updated:' %} {{ last_humidity.date_time.date|date:'j M' }}, {{ last_humidity.date_time.time|date:'G:i' }}</h3>
+            <h2>{% trans 'Last week average:' %} {{ humidity_week_average|floatformat:1 }}%</h2>
             <p class="lead">
-                <a class="btn btn-success btn-lg" href="{% url 'core:get-humidity' %}" role="button">Get current humidity</a>
+                <a class="btn btn-success btn-lg" href="{% url 'core:get-humidity' %}" role="button">{% trans 'Get current humidity' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">See all</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
 
         <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
-            <h1 class="display-3">Last lightness</h1>
+            <h1 class="display-3">{% trans 'Last lightness' %}</h1>
             <h1 class="display-3">
                 {% if last_lightness.value >= 100 %}
                 {% bs_icon 'sun' size='1em' %}
@@ -85,17 +86,32 @@
                 {% bs_icon 'arrow-down-circle-fill' size='1em' %}
                 {% endif %}
             </h1>
-            <h3>Updated: {{ last_lightness.date_time.date|date:'j M' }}, {{ last_lightness.date_time.time|date:'G:i' }}</h3>
-            <h2>Last week average: {{ lightness_week_average|floatformat:1 }} lx</h2>
+            <h3>{% trans 'Updated:' %} {{ last_lightness.date_time.date|date:'j M' }}, {{ last_lightness.date_time.time|date:'G:i' }}</h3>
+            <h2>{% trans 'Last week average:' %} {{ lightness_week_average|floatformat:1 }} lx</h2>
             <p class="lead">
-                <a class="btn btn-success btn-lg" href="{% url 'core:get-lightness' %}" role="button">Get current lightness</a>
+                <a class="btn btn-success btn-lg" href="{% url 'core:get-lightness' %}" role="button">{% trans 'Get current lightness' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:lightness-list' %}" role="button">See all</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'data:lightness-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
     </div>
 </div>
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
+{% get_current_language as LANGUAGE_CODE %}
 {% endblock header %}
 
 {% block content %}

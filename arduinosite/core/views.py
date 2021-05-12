@@ -17,10 +17,13 @@ def home_page(request):
     temperature_week_average = Temperature.objects.get_last_week_average()
     humidity_week_average = Humidity.objects.get_last_week_average()
     lightness_week_average = Lightness.objects.get_last_week_average()
-    current_time = datetime.utcnow()
+    current_date = datetime.utcnow()
+    # current_time = 
+    current_hour = datetime.utcnow().hour
     context = {
         'last_temperature': last_temperature,
-        'current_time': current_time,
+        'current_hour': current_hour,
+        'current_date': current_date,
         'last_humidity': last_humidity,
         'temperature_week_average': temperature_week_average,
         'humidity_week_average': humidity_week_average,

@@ -4,9 +4,9 @@
 {% block header %}
 <div class="jumbotron">
     <h1 class="display-4">
-        {% if current_time|date:'G' < 12 %}
+        {% if current_hour < 12 %}
         {% trans 'Good morning' %},
-        {% elif current_time|date:'G' < 19 %}
+        {% elif current_hour < 19 %}
         {% trans 'Good afternoon' %},
         {% else %}
         {% trans 'Good evening' %},
@@ -14,7 +14,7 @@
         User
     </h1>
     
-    <p class="lead">{% trans 'Today is' %} {{ current_time|date:'l' }}, {{ current_time|date:'j E Y'}}. </p>
+    <p class="lead">{% trans 'Today is' %} {{ current_date|date:'l' }}, {{ current_date|date:'j E Y'}}. </p>
     <hr class="my-4">
     <p>
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝

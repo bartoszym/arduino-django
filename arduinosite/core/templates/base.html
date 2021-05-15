@@ -1,5 +1,6 @@
 {% load bootstrap4 %}
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,13 +8,13 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{% trans 'Control your Home' %}</title>
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}" />  
         {% bootstrap_css %}
         {% bootstrap_javascript %}
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg" id="dim-green">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'core:home' %}">{% trans 'Main page' %}</a>
                 <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

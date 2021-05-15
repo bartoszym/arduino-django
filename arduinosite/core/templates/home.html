@@ -2,7 +2,7 @@
 {% load bootstrap_icons %}
 {% load i18n %}
 {% block header %}
-<div class="jumbotron">
+<div class="jumbotron" id="sand">
     <h1 class="display-4">
         {% if current_hour < 12 %}
         {% trans 'Good morning' %},
@@ -20,12 +20,12 @@
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
     </p>
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Create account!</a>
+        <a class="btn btn-primary btn-lg" id="dim-green" href="#" role="button">Create account!</a>
     </p>
 </div>
 <div>
     <div class="container-fluid " style="display: inline-flex;">
-        <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+        <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" id="sand">
             <h1 class="display-3">{% trans 'Last temperature' %}</h1>
             <h1 class="display-3">
                 {% if last_temperature.value >= 20 %}
@@ -46,11 +46,11 @@
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-temperature' %}" role="button">{% trans 'Get current temperature' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">{% trans 'See all' %}</a>
+                <a class="btn btn-lg" id="dim-green" href="{% url 'data:temperature-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
 
-        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
+        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" id="sand">
             <h1 class="display-3">{% trans 'Last humidity' %}</h1>
             <h1 class="display-3">
                 {% bs_icon 'moisture' size='1em' %}
@@ -67,11 +67,11 @@
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-humidity' %}" role="button">{% trans 'Get current humidity' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">{% trans 'See all' %}</a>
+                <a class="btn btn-primary btn-lg" id="dim-green" href="{% url 'data:humidity-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
 
-        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
+        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" id="sand">
             <h1 class="display-3">{% trans 'Last lightness' %}</h1>
             <h1 class="display-3">
                 {% if last_lightness.value >= 100 %}
@@ -92,7 +92,7 @@
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-lightness' %}" role="button">{% trans 'Get current lightness' %}</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'data:lightness-list' %}" role="button">{% trans 'See all' %}</a>
+                <a class="btn btn-primary btn-lg" id="dim-green" href="{% url 'data:lightness-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
         </div>
     </div>

@@ -74,7 +74,7 @@ msgstr "Pobierz aktualną temperaturę"
 
 #: templates/home.html:49 templates/home.html:70 templates/home.html:95
 msgid "See all"
-msgstr "Pokaż wszystkie"
+msgstr "Generuj raporty"
 
 #: templates/home.html:54
 msgid "Last humidity"

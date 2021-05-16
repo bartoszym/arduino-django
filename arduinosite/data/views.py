@@ -1,6 +1,6 @@
 from django.db.models.functions import ExtractDay
 from django.db.models import Sum
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView
@@ -54,7 +54,7 @@ class LightnessDeleteView(DeleteView):
     success_url = reverse_lazy('data:lightness-list')
 
 def temperature_chart(request):
-    chart_dict = defaultdict(lambda: 0)
+    chart_dict = {}
     temperatures_current_month = Temperature.objects.filter(
         date_time__month=datetime.today().month
         ).annotate(day=ExtractDay('date_time')).values('day', 'value')
@@ -63,8 +63,26 @@ def temperature_chart(request):
         daily_values = temperatures_current_month.filter(day=i)
         values_amount = daily_values.aggregate(amount=Sum('value'))['amount']
         if values_amount:
-            average_value = values_amount/len(daily_values)
-            print(average_value)
+            average_value = round(values_amount/len(daily_values), 2)
+            chart_dict[i] = average_value
+        else:
+            chart_dict[i] = 0
+        print(i, chart_dict[i])
+    
+    return JsonResponse({
+        'title': 'Temperatury',
+        'data': {
+            'labels': list(chart_dict.keys()),
+            'datasets': [{
+                'label': 'Temperature',
+                'background-color': '#79aec8',
+                'border-color': '#79aec8',
+                'data': list(chart_dict.values()),
+            }]
+        }
+    })
+            
+            
             
     # for i in temperatures_current_month:
     #     chart_dict[i['day']] = chart_dict[i['day']] + i.get('value')

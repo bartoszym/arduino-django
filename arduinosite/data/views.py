@@ -53,7 +53,8 @@ class LightnessDeleteView(DeleteView):
     template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:lightness-list')
 
-def create_form(request, chosen_month):
+def create_form(request):
+    chosen_month = datetime.today().month
     if request.method == 'POST':
         form = MonthForm(request.POST, initial={'month': chosen_month})
         if form.is_valid():
@@ -61,7 +62,7 @@ def create_form(request, chosen_month):
     else:
         form = MonthForm(initial={'month': chosen_month})
         
-    return form
+    return form, chosen_month
 
 def create_chart_data(queryset):
     chart_dict = {}
@@ -79,8 +80,7 @@ def create_chart_data(queryset):
     return chart_dict
 
 def temperature_chart(request):
-    chosen_month = datetime.today().month
-    form = create_form(request, chosen_month)
+    form, chosen_month = create_form(request)
     
     temperatures_current_month = Temperature.objects.filter(
         date_time__month=chosen_month
@@ -95,8 +95,7 @@ def temperature_chart(request):
     })
 
 def humidity_chart(request):
-    chosen_month = datetime.today().month
-    form = create_form(request, chosen_month)
+    form, chosen_month = create_form(request)
     
     humidities_current_month = Humidity.objects.filter(
         date_time__month=chosen_month
@@ -111,8 +110,7 @@ def humidity_chart(request):
     })
     
 def lightness_chart(request):
-    chosen_month = datetime.today().month
-    form = create_form(request, chosen_month)
+    form, chosen_month = create_form(request)
     
     lightnesses_current_month = Lightness.objects.filter(
         date_time__month=chosen_month

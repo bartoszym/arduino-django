@@ -11,10 +11,16 @@
     <h1 class="display-6">{% trans 'Lightnesses' %}</h1>
   {% endif %}
 </div>
+{% if 'temperatures' in request.path %}
 <form action="{% url 'data:temperature-chart' %}" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" value="Submit">
+{% elif 'humidities' in request.path %}
+<form action="{% url 'data:humidity-chart' %}" method="post">
+{% elif 'lightness' in request.path %}
+<form action="{% url 'data:lightness-chart' %}" method="post">
+{% endif %}
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Submit">
 </form>
   <div id="container" style="width: 75%;">
     <canvas id="line-chart"></canvas>

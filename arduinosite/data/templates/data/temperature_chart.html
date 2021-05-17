@@ -25,12 +25,19 @@
           backgroundColor: [
             '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
           ],
-          label: 'Temperatures'
         }],
         labels: {{ labels|safe }}
       },
       options: {
-        responsive: true
+        legend: {
+          display: false
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Custom Chart Title'
+            }
+        }
       }
     };
 

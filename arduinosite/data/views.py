@@ -57,11 +57,11 @@ class LightnessDeleteView(DeleteView):
 def temperature_chart(request):
     chosen_month = datetime.today().month
     if request.method == 'POST':
-        form = MonthForm(request.POST)
+        form = MonthForm(request.POST, initial={'month': chosen_month})
         if form.is_valid():
             chosen_month = form.cleaned_data['month']
     else:
-        form = MonthForm()
+        form = MonthForm(initial={'month': chosen_month})
         
     chart_dict = {}
     temperatures_current_month = Temperature.objects.filter(
@@ -77,30 +77,9 @@ def temperature_chart(request):
             chart_dict[i] = average_value
         else:
             chart_dict[i] = 0
-        print(i, chart_dict[i])
     
     return render(request, 'data/temperature_chart.html', {
         'labels': list(chart_dict.keys()),
         'data': list(chart_dict.values()),
         'form': form,
     })
-    # return JsonResponse({
-    #     'title': 'Temperatury',
-    #     'data': {
-    #         'labels': list(chart_dict.keys()),
-    #         'datasets': [{
-    #             'label': 'Temperature',
-    #             'background-color': '#79aec8',
-    #             'border-color': '#79aec8',
-    #             'data': list(chart_dict.values()),
-    #         }]
-    #     }
-    # })
-            
-            
-            
-    # for i in temperatures_current_month:
-    #     chart_dict[i['day']] = chart_dict[i['day']] + i.get('value')
-    #     # print(i.get('value'))
-    # print(temperatures_current_month)
-    # print(chart_dict)

@@ -1,14 +1,15 @@
 from django.db.models.functions import ExtractDay
 from django.db.models import Sum
+from django.forms import forms
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView
 
-from calendar import monthrange
-from collections import defaultdict
-from datetime import date, datetime
+from calendar import month, monthrange
+from datetime import datetime
 
+from .forms import MonthForm
 from .models import Temperature, Humidity, Lightness
 
 def index(request):
@@ -54,11 +55,20 @@ class LightnessDeleteView(DeleteView):
     success_url = reverse_lazy('data:lightness-list')
 
 def temperature_chart(request):
+    chosen_month = datetime.today().month
+    if request.method == 'POST':
+        form = MonthForm(request.POST)
+        if form.is_valid():
+            chosen_month = form.cleaned_data['month']
+    else:
+        form = MonthForm()
+        
     chart_dict = {}
     temperatures_current_month = Temperature.objects.filter(
-        date_time__month=datetime.today().month
+        date_time__month=chosen_month
         ).annotate(day=ExtractDay('date_time')).values('day', 'value')
     month_length = monthrange(datetime.today().year, datetime.today().month)[1]
+    
     for i in range(1, month_length+1):
         daily_values = temperatures_current_month.filter(day=i)
         values_amount = daily_values.aggregate(amount=Sum('value'))['amount']
@@ -69,18 +79,23 @@ def temperature_chart(request):
             chart_dict[i] = 0
         print(i, chart_dict[i])
     
-    return JsonResponse({
-        'title': 'Temperatury',
-        'data': {
-            'labels': list(chart_dict.keys()),
-            'datasets': [{
-                'label': 'Temperature',
-                'background-color': '#79aec8',
-                'border-color': '#79aec8',
-                'data': list(chart_dict.values()),
-            }]
-        }
+    return render(request, 'data/temperature_chart.html', {
+        'labels': list(chart_dict.keys()),
+        'data': list(chart_dict.values()),
+        'form': form,
     })
+    # return JsonResponse({
+    #     'title': 'Temperatury',
+    #     'data': {
+    #         'labels': list(chart_dict.keys()),
+    #         'datasets': [{
+    #             'label': 'Temperature',
+    #             'background-color': '#79aec8',
+    #             'border-color': '#79aec8',
+    #             'data': list(chart_dict.values()),
+    #         }]
+    #     }
+    # })
             
             
             

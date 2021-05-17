@@ -30,6 +30,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'data:lightness-list' %}">{% trans 'Lightnesses' %}</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{% trans 'Settings' %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:logout' %}">{% trans 'Log out' %}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:login' %}">{% trans 'Log in' %}</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

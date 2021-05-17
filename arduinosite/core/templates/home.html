@@ -11,7 +11,11 @@
         {% else %}
         {% trans 'Good evening' %},
         {% endif %}
-        User
+        {% if user.is_authenticated %}
+        {{ user.username }}
+        {% else %}
+        {% trans 'Guest' %}
+        {% endif %}
     </h1>
     
     <p class="lead">{% trans 'Today is' %} {{ current_date|date:'l' }}, {{ current_date|date:'j E Y'}}. </p>
@@ -19,9 +23,14 @@
     <p>
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
     </p>
+    {% if not user.is_authenticated %}
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{% url 'core:register' %}" role="button">Create account!</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'core:register' %}" role="button">{% trans 'Create account' %}</a>
     </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'core:login' %}" role="button">{% trans 'Log in' %}</a>
+    </p>
+    {% endif %}
 </div>
 {% endblock header %}
 {% block content %}

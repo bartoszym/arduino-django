@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block header %}
+<div class="jumbotron" style="padding: 2%; margin: 10px;">
+    <h1 class="display-6">{% trans 'Registration' %}</h1>
+</div>
+{% endblock header %}
+{% block content %}
+<div>
+<form method="POST">
+{% csrf_token %}
+{% for field in form %}
+<p>
+    {{ field.label_tag }}<br>
+    {{ field }}
+    {% for error in field.errors %}
+    <p style="color: red;">{{ error }}</p>
+    {% endfor %}
+</p>
+{% endfor %}
+<button type="submit">{% trans 'Sign up' %}</button>
+</form>
+</div>
+{% endblock %}

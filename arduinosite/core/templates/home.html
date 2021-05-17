@@ -20,9 +20,11 @@
         Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
     </p>
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Create account!</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'core:register' %}" role="button">Create account!</a>
     </p>
 </div>
+{% endblock header %}
+{% block content %}
 <div>
     <div class="container-fluid " style="display: inline-flex;">
         <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
@@ -121,7 +123,5 @@
     <input type="submit" value="Go">
 </form>
 {% get_current_language as LANGUAGE_CODE %}
-{% endblock header %}
 
-{% block content %}
 {% endblock %}

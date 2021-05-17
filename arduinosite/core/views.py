@@ -1,7 +1,8 @@
+from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
-from django.template import loader
 
+from .forms import RegisterForm
 from datetime import datetime
 
 from data.models import Temperature, Humidity, Lightness
@@ -43,3 +44,18 @@ def get_humidity(request):
 def get_lightness(request):
     Lightness.get_lightness()
     return redirect('core:home')
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            authenticated_user = authenticate(username=new_user.username, password = request.POST['password1'])
+            login(request, authenticated_user)
+            return redirect('core:home')
+    else:
+        form = RegisterForm()
+        
+    context = {'form': form}
+    
+    return render(request, 'register.html', context)

@@ -3,7 +3,13 @@
 
 {% block content %}
 <div class="jumbotron" style="padding: 2%; margin: 10px;">
+  {% if 'temperatures' in request.path %}
     <h1 class="display-6">{% trans 'Temperatures' %}</h1>
+  {% elif 'humidities' in request.path %}
+    <h1 class="display-6">{% trans 'Humidities' %}</h1>
+  {% elif 'lightness' in request.path %}
+    <h1 class="display-6">{% trans 'Lightnesses' %}</h1>
+  {% endif %}
 </div>
 <form action="{% url 'data:temperature-chart' %}" method="post">
   {% csrf_token %}

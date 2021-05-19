@@ -1,15 +1,23 @@
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.views.generic.base import TemplateView
+from django.views.generic import UpdateView
 
 from .forms import RegisterForm
 from datetime import datetime
 
+from .models import Settings
 from data.models import Temperature, Humidity, Lightness
 
 
-class HomePageView(TemplateView):
-    template_name = "home.html"
+class SettingsView(UpdateView):
+    model = Settings
+    fields = [
+        'auto_update_temperature', 'update_temperature_time1', 'update_temperature_time2', 'update_temperature_time3',
+        'auto_update_humidity', 'update_humidity_time1', 'update_humidity_time2', 'update_humidity_time3',
+        'auto_update_lightness', 'update_lightness_time1', 'update_lightness_time2', 'update_lightness_time3'
+        ]
+    template_name = 'settings_form.html'
+    success_url = '/'
     
 def home_page(request):
     last_temperature = Temperature.objects.latest('date_time')
@@ -19,7 +27,6 @@ def home_page(request):
     humidity_week_average = Humidity.objects.get_last_week_average()
     lightness_week_average = Lightness.objects.get_last_week_average()
     current_date = datetime.utcnow()
-    # current_time = 
     current_hour = datetime.utcnow().hour
     context = {
         'last_temperature': last_temperature,

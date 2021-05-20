@@ -19,4 +19,3 @@ class Settings(models.Model):
     update_lightness_time1 = models.IntegerField(choices=time_choices, default=0, verbose_name=_('Update time of lightness'))
     update_lightness_time2 = models.IntegerField(choices=time_choices, default=0, verbose_name=_('Update time of lightness'))
     update_lightness_time3 = models.IntegerField(choices=time_choices, default=0, verbose_name=_('Update time of lightness'))
-    

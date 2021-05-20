@@ -20,9 +20,6 @@
     
     <p class="lead">{% trans 'Today is' %} {{ current_date|date:'l' }}, {{ current_date|date:'j E Y'}}. </p>
     <hr class="my-4">
-    <p>
-        Only thing you nedd is Arduino with appropiate modules, contact SmartHomeCompany® and we will help you 🤝
-    </p>
     {% if not user.is_authenticated %}
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="{% url 'core:register' %}" role="button">{% trans 'Create account' %}</a>
@@ -56,12 +53,14 @@
             <p class="lead">
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-temperature' %}" role="button">{% trans 'Get current temperature' %}</a>
             </p>
+            {% if user.is_authenticated %}
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:temperature-chart' %}" role="button">{% trans 'See charts' %}</a>
             </p>
+            {% endif %}
         </div>
 
         <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
@@ -80,12 +79,14 @@
             <p class="lead">
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-humidity' %}" role="button">{% trans 'Get current humidity' %}</a>
             </p>
+            {% if user.is_authenticated %}
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:humidity-chart' %}" role="button">{% trans 'See charts' %}</a>
             </p>
+            {% endif %}
         </div>
 
         <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
@@ -108,29 +109,15 @@
             <p class="lead">
                 <a class="btn btn-success btn-lg" href="{% url 'core:get-lightness' %}" role="button">{% trans 'Get current lightness' %}</a>
             </p>
+            {% if user.is_authenticated %}
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:lightness-list' %}" role="button">{% trans 'See all' %}</a>
             </p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="{% url 'data:lightness-chart' %}" role="button">{% trans 'See charts' %}</a>
             </p>
+            {% endif %}
         </div>
     </div>
 </div>
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}">
-    <select name="language">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Go">
-</form>
-{% get_current_language as LANGUAGE_CODE %}
-
 {% endblock %}

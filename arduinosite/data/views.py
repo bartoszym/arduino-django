@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.functions import ExtractDay
 from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
@@ -11,10 +13,8 @@ from datetime import datetime
 from .forms import MonthForm
 from .models import Temperature, Humidity, Lightness
 
-def index(request):
-    return HttpResponse("Hello world")
 
-class TemperatureListView(ListView):
+class TemperatureListView(LoginRequiredMixin, ListView):
     model = Temperature
     paginate_by = 10
     
@@ -25,12 +25,12 @@ class TemperatureListView(ListView):
             return redirect('data:temperature-chart')
         return HttpResponseRedirect(self.request.path)
     
-class TemperatureDeleteView(DeleteView):
+class TemperatureDeleteView(LoginRequiredMixin, DeleteView):
     model = Temperature
     template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:temperature-list')
         
-class HumidityListView(ListView):
+class HumidityListView(LoginRequiredMixin, ListView):
     model = Humidity
     paginate_by = 10
     
@@ -41,12 +41,12 @@ class HumidityListView(ListView):
             return redirect('data:humidity-chart')
         return HttpResponseRedirect(self.request.path)
     
-class HumidityDeleteView(DeleteView):
+class HumidityDeleteView(LoginRequiredMixin, DeleteView):
     model = Humidity
     template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:humidity-list')
 
-class LightnessListView(ListView):
+class LightnessListView(LoginRequiredMixin, ListView):
     model = Lightness
     paginate_by = 10
     
@@ -57,7 +57,7 @@ class LightnessListView(ListView):
             return redirect('data:lightness-chart')
         return HttpResponseRedirect(self.request.path)
     
-class LightnessDeleteView(DeleteView):
+class LightnessDeleteView(LoginRequiredMixin, DeleteView):
     model = Lightness
     template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:lightness-list')
@@ -88,6 +88,7 @@ def create_chart_data(queryset):
             
     return chart_dict
 
+@login_required
 def temperature_chart(request):
     form, chosen_month = create_form(request)
     
@@ -103,6 +104,7 @@ def temperature_chart(request):
         'form': form,
     })
 
+@login_required
 def humidity_chart(request):
     form, chosen_month = create_form(request)
     
@@ -117,7 +119,8 @@ def humidity_chart(request):
         'data': list(chart_dict.values()),
         'form': form,
     })
-    
+
+@login_required
 def lightness_chart(request):
     form, chosen_month = create_form(request)
     

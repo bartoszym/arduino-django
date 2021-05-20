@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 
@@ -9,7 +10,7 @@ from .models import Settings
 from data.models import Temperature, Humidity, Lightness
 
 
-class SettingsView(UpdateView):
+class SettingsView(LoginRequiredMixin, UpdateView):
     model = Settings
     fields = [
         'auto_update_temperature', 'update_temperature_time1', 'update_temperature_time2', 'update_temperature_time3',

@@ -1,7 +1,7 @@
 from django.db.models.functions import ExtractDay
 from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView
 
@@ -19,7 +19,10 @@ class TemperatureListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        self.model.get_temperature()
+        if request.POST.get('get_temp') is not None:
+            self.model.get_temperature()
+        elif request.POST.get('see_charts') is not None:
+            return redirect('data:temperature-chart')
         return HttpResponseRedirect(self.request.path)
     
 class TemperatureDeleteView(DeleteView):
@@ -32,7 +35,10 @@ class HumidityListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        self.model.get_humidity()
+        if request.POST.get('get_hum') is not None:
+            self.model.get_humidity()
+        elif request.POST.get('see_charts') is not None:
+            return redirect('data:humidity-chart')
         return HttpResponseRedirect(self.request.path)
     
 class HumidityDeleteView(DeleteView):
@@ -45,7 +51,10 @@ class LightnessListView(ListView):
     paginate_by = 10
     
     def post(self, request, *args, **kwargs):
-        self.model.get_lightness()
+        if request.POST.get('get_light') is not None:
+            self.model.get_lightness()
+        elif request.POST.get('see_charts') is not None:
+            return redirect('data:lightness-chart')
         return HttpResponseRedirect(self.request.path)
     
 class LightnessDeleteView(DeleteView):

@@ -17,9 +17,10 @@
     <th scope="col"></th>
 </thead>
 {% include "data/values_table.html" with object_list=object_list %}
-<form method="POST" value='get_temp'>
+<form method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">{% trans 'Get current lightness' %}</button>
+    <button type="submit" class="btn btn-success" name="get_light">{% trans 'Get current lightness' %}</button>
+    <button type="submit" class="btn btn-primary" name="see_charts">{% trans 'See charts' %}</button>
 </form>
 </div>
 {% endblock %}

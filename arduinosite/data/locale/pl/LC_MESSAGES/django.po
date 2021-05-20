@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 23:57+0200\n"
+"POT-Creation-Date: 2021-05-20 23:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,77 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
+#: forms.py:6
+msgid "January"
+msgstr "Styczeń"
+
+#: forms.py:7
+msgid "February"
+msgstr "Luty"
+
+#: forms.py:8
+msgid "March"
+msgstr "Marzec"
+
+#: forms.py:9
+msgid "April"
+msgstr "Kwiecień"
+
+#: forms.py:10
+msgid "May"
+msgstr "Maj"
+
+#: forms.py:11
+msgid "June"
+msgstr "Czerwiec"
+
+#: forms.py:12
+msgid "July"
+msgstr "Lipiec"
+
+#: forms.py:13
+msgid "August"
+msgstr "Sierpień"
+
+#: forms.py:14
+msgid "September"
+msgstr "Wrzesień"
+
+#: forms.py:15
+msgid "October"
+msgstr "Październik"
+
+#: forms.py:16
+msgid "November"
+msgstr "Listopad"
+
+#: forms.py:17
+msgid "December"
+msgstr "Grudzień"
+
+#: forms.py:19
+msgid "Choose month"
+msgstr "Wybierz miesiąc"
+
+#: templates/data/chart.html:7 templates/data/temperature_list.html:6
+msgid "Temperatures"
+msgstr "Temperatury"
+
+#: templates/data/chart.html:9 templates/data/humidity_list.html:6
+msgid "Humidities"
+msgstr "Wilgotność"
+
+#: templates/data/chart.html:11 templates/data/lightness_list.html:6
+msgid "Lightnesses"
+msgstr "Jasność"
+
+#: templates/data/chart.html:23
+msgid "Submit"
+msgstr "Pokaż"
+
 #: templates/data/data_object_delete.html:5
 msgid "Are you sure you want to delete"
 msgstr "Czy na pewno usunąć"
-
-#: templates/data/humidity_list.html:6
-msgid "Humidities"
-msgstr "Wilgotność"
 
 #: templates/data/humidity_list.html:14
 msgid "humidity"
@@ -46,9 +110,10 @@ msgstr "czas"
 msgid "Get current humidity"
 msgstr "Pobierz aktualną wilgotność"
 
-#: templates/data/lightness_list.html:6
-msgid "Lightnesses"
-msgstr "Jasność"
+#: templates/data/humidity_list.html:23 templates/data/lightness_list.html:23
+#: templates/data/temperature_list.html:23
+msgid "See charts"
+msgstr "Pokaż wykresy"
 
 #: templates/data/lightness_list.html:14
 msgid "lightness"
@@ -57,10 +122,6 @@ msgstr "jasność"
 #: templates/data/lightness_list.html:22
 msgid "Get current lightness"
 msgstr "Pobierz aktualną jasność"
-
-#: templates/data/temperature_list.html:6
-msgid "Temperatures"
-msgstr "Temperatury"
 
 #: templates/data/temperature_list.html:14
 msgid "temperature"

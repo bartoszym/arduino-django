@@ -20,7 +20,7 @@
 {% endif %}
 {% csrf_token %}
 {{ form }}
-<input type="submit" value="Submit">
+<button type="submit" class="btn btn-primary" name="see_charts">{% trans 'Submit' %}</button>
 </form>
   <div id="container" style="width: 75%;">
     <canvas id="line-chart"></canvas>

@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 {% load i18n %}
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,20 @@
                         <a class="nav-link" href="{% url 'core:login' %}">{% trans 'Log in' %}</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="en" />
+                            <input type="image" src="{% static 'core/england.png' %}" width="35" height="35" />
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="pl" />
+                            <input type="image" src="{% static 'core/poland.png' %}" width="35" height="35" />
+                        </form>
+                    </li>
                 </ul>
             </div>
         </nav>

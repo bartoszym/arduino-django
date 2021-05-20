@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 23:46+0200\n"
+"POT-Creation-Date: 2021-05-20 23:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,25 +20,62 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: templates/base.html:9
+#: models.py:8
+msgid "Automatic update of temperature"
+msgstr "Automatyczna aktualizacja temperatury"
+
+#: models.py:9 models.py:10 models.py:11
+msgid "Update time of temperature"
+msgstr "Godzina aktualizacji temperatury"
+
+#: models.py:13
+msgid "Automatic update of humidity"
+msgstr "Automatyczna aktualizacja wilgotności"
+
+#: models.py:14 models.py:15 models.py:16
+msgid "Update time of humidity"
+msgstr "Godzina aktualizacji wilgotności"
+
+#: models.py:18
+msgid "Automatic update of lightness"
+msgstr "Automatyczna aktualizacja jasności"
+
+#: models.py:19 models.py:20 models.py:21
+msgid "Update time of lightness"
+msgstr "Godzina aktualizacji jasności"
+
+#: templates/base.html:10
 msgid "Control your Home"
 msgstr ""
 
-#: templates/base.html:18
+#: templates/base.html:19
 msgid "Main page"
 msgstr "Strona główna"
 
-#: templates/base.html:25
+#: templates/base.html:26
 msgid "Temperatures"
 msgstr "Temperatury"
 
-#: templates/base.html:28
+#: templates/base.html:29
 msgid "Humidities"
 msgstr "Wilgotność"
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Lightnesses"
 msgstr "Jasność"
+
+#: templates/base.html:36 templates/settings_form.html:5
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: templates/base.html:39
+msgid "Log out"
+msgstr "Wyloguj się"
+
+#: templates/base.html:43 templates/home.html:28 templates/login.html:5
+#: templates/login.html:26
+msgid "Log in"
+msgstr "Zaloguj się"
 
 #: templates/home.html:8
 msgid "Good morning"
@@ -53,41 +90,65 @@ msgid "Good evening"
 msgstr "Dobry wieczór"
 
 #: templates/home.html:17
+msgid "Guest"
+msgstr "Gościu"
+
+#: templates/home.html:21
 msgid "Today is"
 msgstr "Dziś jest"
 
-#: templates/home.html:29
+#: templates/home.html:25
+msgid "Create account"
+msgstr "Stwórz konto"
+
+#: templates/home.html:37
 msgid "Last temperature"
 msgstr "Ostatnia temperatura"
 
-#: templates/home.html:43 templates/home.html:64 templates/home.html:89
+#: templates/home.html:51 templates/home.html:77 templates/home.html:107
 msgid "Updated:"
 msgstr "Zaktualizowano:"
 
-#: templates/home.html:44 templates/home.html:65 templates/home.html:90
+#: templates/home.html:52 templates/home.html:78 templates/home.html:108
 msgid "Last week average:"
 msgstr "Średnia zeszłego tygodnia:"
 
-#: templates/home.html:46
+#: templates/home.html:54
 msgid "Get current temperature"
 msgstr "Pobierz aktualną temperaturę"
 
-#: templates/home.html:49 templates/home.html:70 templates/home.html:95
+#: templates/home.html:58 templates/home.html:84 templates/home.html:114
 msgid "See all"
-msgstr "Generuj raporty"
+msgstr "Pokaż wszystkie"
 
-#: templates/home.html:54
+#: templates/home.html:61 templates/home.html:87 templates/home.html:117
+msgid "See charts"
+msgstr "Pokaż wykresy"
+
+#: templates/home.html:67
 msgid "Last humidity"
 msgstr "Ostatnia wilgotność"
 
-#: templates/home.html:67
+#: templates/home.html:80
 msgid "Get current humidity"
 msgstr "Pobierz aktualną wilgotność"
 
-#: templates/home.html:75
+#: templates/home.html:93
 msgid "Last lightness"
 msgstr "Ostatnia jasność"
 
-#: templates/home.html:92
+#: templates/home.html:110
 msgid "Get current lightness"
 msgstr "Pobierz aktualną jasność"
+
+#: templates/register.html:5
+msgid "Registration"
+msgstr "Rejestracja"
+
+#: templates/register.html:21
+msgid "Sign up"
+msgstr "Zarejestruj się"
+
+#: templates/settings_form.html:14
+msgid "Update"
+msgstr "Zaktualizuj"

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'bootstrap4',
     'django_bootstrap_icons',
+    'django_cron',
     
     # my apps
     'data',
@@ -56,6 +57,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRON_CLASSES = [
+    'core.cron.UpdateTemperatureCron',
+    'core.cron.UpdateHumidityCron',
+    'core.cron.UpdateLightnessCron',
 ]
 
 ROOT_URLCONF = 'arduinosite.urls'
@@ -115,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -150,3 +157,4 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
 LOGOUT_REDIRECT_URL = 'core:home'
+LOGIN_URL = '/login/'

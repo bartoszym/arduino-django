@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 23:42+0200\n"
+"POT-Creation-Date: 2021-05-25 18:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,72 +72,72 @@ msgstr "Ustawienia"
 msgid "Log out"
 msgstr "Wyloguj się"
 
-#: templates/base.html:43 templates/home.html:28 templates/login.html:5
+#: templates/base.html:43 templates/home.html:35 templates/login.html:5
 #: templates/login.html:26
 msgid "Log in"
 msgstr "Zaloguj się"
 
-#: templates/home.html:8
+#: templates/home.html:15
 msgid "Good morning"
 msgstr "Dzień dobry"
 
-#: templates/home.html:10
+#: templates/home.html:17
 msgid "Good afternoon"
 msgstr "Witaj"
 
-#: templates/home.html:12
+#: templates/home.html:19
 msgid "Good evening"
 msgstr "Dobry wieczór"
 
-#: templates/home.html:17
+#: templates/home.html:24
 msgid "Guest"
 msgstr "Gościu"
 
-#: templates/home.html:21
+#: templates/home.html:28
 msgid "Today is"
 msgstr "Dziś jest"
 
-#: templates/home.html:25
+#: templates/home.html:32
 msgid "Create account"
 msgstr "Stwórz konto"
 
-#: templates/home.html:37
+#: templates/home.html:44
 msgid "Last temperature"
 msgstr "Ostatnia temperatura"
 
-#: templates/home.html:51 templates/home.html:77 templates/home.html:107
+#: templates/home.html:58 templates/home.html:84 templates/home.html:114
 msgid "Updated:"
 msgstr "Zaktualizowano:"
 
-#: templates/home.html:52 templates/home.html:78 templates/home.html:108
+#: templates/home.html:59 templates/home.html:85 templates/home.html:115
 msgid "Last week average:"
 msgstr "Średnia zeszłego tygodnia:"
 
-#: templates/home.html:54
+#: templates/home.html:61
 msgid "Get current temperature"
 msgstr "Pobierz aktualną temperaturę"
 
-#: templates/home.html:58 templates/home.html:84 templates/home.html:114
+#: templates/home.html:65 templates/home.html:91 templates/home.html:121
 msgid "See all"
 msgstr "Pokaż wszystkie"
 
-#: templates/home.html:61 templates/home.html:87 templates/home.html:117
+#: templates/home.html:68 templates/home.html:94 templates/home.html:124
 msgid "See charts"
 msgstr "Pokaż wykresy"
 
-#: templates/home.html:67
+#: templates/home.html:74
 msgid "Last humidity"
 msgstr "Ostatnia wilgotność"
 
-#: templates/home.html:80
+#: templates/home.html:87
 msgid "Get current humidity"
 msgstr "Pobierz aktualną wilgotność"
 
-#: templates/home.html:93
+#: templates/home.html:100
 msgid "Last lightness"
 msgstr "Ostatnia jasność"
 
-#: templates/home.html:110
+#: templates/home.html:117
 msgid "Get current lightness"
 msgstr "Pobierz aktualną jasność"
 
@@ -152,3 +152,7 @@ msgstr "Zarejestruj się"
 #: templates/settings_form.html:14
 msgid "Update"
 msgstr "Zaktualizuj"
+
+#: views.py:48 views.py:53 views.py:58
+msgid "Arduino is not working, check if it's turned on!"
+msgstr "Arduino nie działa, sprawdź czy jest włączone!"

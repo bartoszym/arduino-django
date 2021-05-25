@@ -2,6 +2,13 @@
 {% load bootstrap_icons %}
 {% load i18n %}
 {% block header %}
+{% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+            {% endif %}
 <div class="jumbotron">
     <h1 class="display-4">
         {% if current_hour < 12 %}

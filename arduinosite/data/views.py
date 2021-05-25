@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.functions import ExtractDay
@@ -5,6 +6,7 @@ from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, DeleteView
 
 from calendar import month, monthrange
@@ -20,7 +22,8 @@ class TemperatureListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_temp') is not None:
-            self.model.get_temperature()
+            if self.model.get_temperature() == False:
+                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
         elif request.POST.get('see_charts') is not None:
             return redirect('data:temperature-chart')
         return HttpResponseRedirect(self.request.path)
@@ -36,7 +39,8 @@ class HumidityListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_hum') is not None:
-            self.model.get_humidity()
+            if self.model.get_humidity() == False:
+                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
         elif request.POST.get('see_charts') is not None:
             return redirect('data:humidity-chart')
         return HttpResponseRedirect(self.request.path)
@@ -52,7 +56,8 @@ class LightnessListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_light') is not None:
-            self.model.get_lightness()
+            if self.model.get_lightness() == False:
+                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
         elif request.POST.get('see_charts') is not None:
             return redirect('data:lightness-chart')
         return HttpResponseRedirect(self.request.path)

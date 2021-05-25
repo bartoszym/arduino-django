@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 23:37+0200\n"
+"POT-Creation-Date: 2021-05-25 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,55 +20,55 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: forms.py:6
+#: forms.py:7
 msgid "January"
 msgstr "Styczeń"
 
-#: forms.py:7
+#: forms.py:8
 msgid "February"
 msgstr "Luty"
 
-#: forms.py:8
+#: forms.py:9
 msgid "March"
 msgstr "Marzec"
 
-#: forms.py:9
+#: forms.py:10
 msgid "April"
 msgstr "Kwiecień"
 
-#: forms.py:10
+#: forms.py:11
 msgid "May"
 msgstr "Maj"
 
-#: forms.py:11
+#: forms.py:12
 msgid "June"
 msgstr "Czerwiec"
 
-#: forms.py:12
+#: forms.py:13
 msgid "July"
 msgstr "Lipiec"
 
-#: forms.py:13
+#: forms.py:14
 msgid "August"
 msgstr "Sierpień"
 
-#: forms.py:14
+#: forms.py:15
 msgid "September"
 msgstr "Wrzesień"
 
-#: forms.py:15
+#: forms.py:16
 msgid "October"
 msgstr "Październik"
 
-#: forms.py:16
+#: forms.py:17
 msgid "November"
 msgstr "Listopad"
 
-#: forms.py:17
+#: forms.py:18
 msgid "December"
 msgstr "Grudzień"
 
-#: forms.py:19
+#: forms.py:20
 msgid "Choose month"
 msgstr "Wybierz miesiąc"
 
@@ -131,6 +131,10 @@ msgstr "temperatura"
 msgid "Get current temperature"
 msgstr "Pobierz aktualną temperaturę"
 
-#: templates/data/values_table.html:18
+#: templates/data/values_table.html:24
 msgid "Delete"
 msgstr "Usuń"
+
+#: views.py:26 views.py:43 views.py:60
+msgid "Arduino is not working, check if it's turned on!"
+msgstr "Arduino nie działa, sprawdź czy jest włączone!"

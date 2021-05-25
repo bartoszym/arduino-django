@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import UpdateView
 
 from .forms import RegisterForm
@@ -42,15 +44,18 @@ def home_page(request):
     return render(request, 'home.html', context)
 
 def get_temperature(request):
-    Temperature.get_temperature()
+    if Temperature.get_temperature() == False:
+        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
     return redirect('core:home')
 
 def get_humidity(request):
-    Humidity.get_humidity()
+    if Humidity.get_humidity() == False:
+        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
     return redirect('core:home')
 
 def get_lightness(request):
-    Lightness.get_lightness()
+    if Lightness.get_lightness() == False:
+        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
     return redirect('core:home')
 
 def register(request):

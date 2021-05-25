@@ -30,7 +30,10 @@ class Temperature(Data):
     def get_temperature(cls):
         url = 'http://192.168.1.16/t' # adres dom
         # url = 'http://192.168.0.109/t' # adres Domi
-        n = urllib.request.urlopen(url).read()
+        try:
+            n = urllib.request.urlopen(url).read()
+        except urllib.error.URLError:
+            return False
         n = n.decode("utf-8")
         cls.objects.create(value=n)
         return
@@ -45,7 +48,10 @@ class Humidity(Data):
     def get_humidity(cls):
         url = 'http://192.168.1.16/h' # adres dom
         # url = 'http://192.168.0.109/h' # adres Domi
-        n = urllib.request.urlopen(url).read()
+        try:
+            n = urllib.request.urlopen(url).read()
+        except urllib.error.URLError:
+            return False
         n = n.decode("utf-8")
         cls.objects.create(value=n)
         return
@@ -63,7 +69,10 @@ class Lightness(Data):
     def get_lightness(cls):
         url = 'http://192.168.1.16/l' # adres dom
         # url = 'http://192.168.0.109/l' # adres Domi
-        n = urllib.request.urlopen(url).read()
+        try:
+            n = urllib.request.urlopen(url).read()
+        except urllib.error.URLError:
+            return False
         n = n.decode("utf-8")
         cls.objects.create(value=n)
         return

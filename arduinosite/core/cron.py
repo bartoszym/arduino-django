@@ -9,14 +9,14 @@ def get_temperature_update_times():
     if sett.auto_update_temperature == False:
         return
     hours = []
-    if sett.update_temperature_time1 != 0:
+    if sett.update_temperature_time1 != -1:
         hours.append(sett.update_temperature_time1)
-    if sett.update_temperature_time2 != 0:
+    if sett.update_temperature_time2 != -1:
         hours.append(sett.update_temperature_time2)
-    if sett.update_temperature_time3 != 0:
+    if sett.update_temperature_time3 != -1:
         hours.append(sett.update_temperature_time3)
     hours.sort()
-    hours = [f'{i}:00' for i in hours]
+    hours = [f'{i}:49' for i in hours]
     
     return hours
 
@@ -36,14 +36,14 @@ def get_humidity_update_times():
     if sett.auto_update_humidity == False:
         return
     hours = []
-    if sett.update_humidity_time1 != 0:
+    if sett.update_humidity_time1 != -1:
         hours.append(sett.update_humidity_time1)
-    if sett.update_humidity_time2 != 0:
+    if sett.update_humidity_time2 != -1:
         hours.append(sett.update_humidity_time2)
-    if sett.update_humidity_time3 != 0:
+    if sett.update_humidity_time3 != -1:
         hours.append(sett.update_humidity_time3)
     hours.sort()
-    hours = [f'{i}:00' for i in hours]
+    hours = [f'{i}:49' for i in hours]
     
     return hours
 
@@ -63,14 +63,14 @@ def get_lightness_update_times():
     if sett.auto_update_lightness == False:
         return
     hours = []
-    if sett.update_lightness_time1 != 0:
+    if sett.update_lightness_time1 != -1:
         hours.append(sett.update_lightness_time1)
-    if sett.update_lightness_time2 != 0:
+    if sett.update_lightness_time2 != -1:
         hours.append(sett.update_lightness_time2)
-    if sett.update_lightness_time3 != 0:
+    if sett.update_lightness_time3 != -1:
         hours.append(sett.update_lightness_time3)
     hours.sort()
-    hours = [f'{i}:00' for i in hours]
+    hours = [f'{i}:49' for i in hours]
     
     return hours
 

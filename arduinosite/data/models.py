@@ -1,7 +1,9 @@
 from django.db import models
 
 from datetime import datetime, timedelta
-import urllib.request
+from bs4 import BeautifulSoup
+import requests
+
 
 
 class DataManager(models.Manager):
@@ -28,14 +30,14 @@ class Temperature(Data):
     
     @classmethod
     def get_temperature(cls):
-        url = 'http://192.168.1.16/t' # adres dom
-        # url = 'http://192.168.0.109/t' # adres Domi
+        url = 'http://192.168.1.5' # adres dom
         try:
-            n = urllib.request.urlopen(url).read()
-        except urllib.error.URLError:
+            page = requests.get(url)
+        except requests.exceptions.ConnectionError:
             return False
-        n = n.decode("utf-8")
-        cls.objects.create(value=n)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        temp = soup.find_all(id='t')[-1].get_text()
+        cls.objects.create(value=temp)
         return
     
     def __str__(self):
@@ -46,14 +48,14 @@ class Humidity(Data):
     
     @classmethod
     def get_humidity(cls):
-        url = 'http://192.168.1.16/h' # adres dom
-        # url = 'http://192.168.0.109/h' # adres Domi
+        url = 'http://192.168.1.5' # adres dom
         try:
-            n = urllib.request.urlopen(url).read()
-        except urllib.error.URLError:
+            page = requests.get(url)
+        except requests.exceptions.ConnectionError:
             return False
-        n = n.decode("utf-8")
-        cls.objects.create(value=n)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        hum = soup.find_all(id='h')[-1].get_text()
+        cls.objects.create(value=hum)
         return
     
     def __str__(self):
@@ -67,14 +69,14 @@ class Lightness(Data):
         
     @classmethod
     def get_lightness(cls):
-        url = 'http://192.168.1.16/l' # adres dom
-        # url = 'http://192.168.0.109/l' # adres Domi
+        url = 'http://192.168.1.5' # adres dom
         try:
-            n = urllib.request.urlopen(url).read()
-        except urllib.error.URLError:
+            page = requests.get(url)
+        except requests.exceptions.ConnectionError:
             return False
-        n = n.decode("utf-8")
-        cls.objects.create(value=n)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        light = soup.find_all(id='l')[-1].get_text()
+        cls.objects.create(value=light)
         return
     
     def __str__(self):

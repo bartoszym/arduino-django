@@ -1,26 +1,89 @@
+from typing import Set
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, View
 
-from .forms import RegisterForm
+from .forms import *
 from datetime import datetime
 
 from .models import Settings
 from data.models import Temperature, Humidity, Lightness
 
-
-class SettingsView(LoginRequiredMixin, UpdateView):
-    model = Settings
-    fields = [
-        'auto_update_temperature', 'update_temperature_time1', 'update_temperature_time2', 'update_temperature_time3',
-        'auto_update_humidity', 'update_humidity_time1', 'update_humidity_time2', 'update_humidity_time3',
-        'auto_update_lightness', 'update_lightness_time1', 'update_lightness_time2', 'update_lightness_time3'
-        ]
+class SettingsView(LoginRequiredMixin, View):
     template_name = 'settings_form.html'
-    success_url = '/'
+    
+    def get_object(self):
+        try:
+            object = Settings.objects.get(pk=1)
+        except Settings.DoesNotExist:
+            raise Http404('Settings not found')
+        
+        return object
+    
+    def get_context_data(self, **kwargs):
+        kwargs['settings'] = self.get_object()
+        if 'temperature_settings_form' not in kwargs:
+            kwargs['temperature_settings_form'] = TemperatureSettingsForm(instance=self.get_object())
+        if 'humidity_settings_form' not in kwargs:
+            kwargs['humidity_settings_form'] = HumiditySettingsForm(instance=self.get_object())
+        if 'lightness_settings_form' not in kwargs:
+            kwargs['lightness_settings_form'] = LightnessSettingsForm(instance=self.get_object())
+        if 'move_checker_settings_form' not in kwargs:
+            kwargs['move_checker_settings_form'] = MoveCheckerSettingsForm(instance=self.get_object())
+            
+        return kwargs
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+    
+    def post(self, request, *args, **kwargs):
+        context = {}
+        
+        if 'temperature_settings' in request.POST:
+            temperature_settings_form = TemperatureSettingsForm(request.POST, instance=self.get_object())
+            
+            if temperature_settings_form.is_valid():
+                temperature_settings_form.save()
+            else:
+                context['temperature_settings_form'] = temperature_settings_form
+                
+        if 'humidity_settings' in request.POST:
+            humidity_settings_form = HumiditySettingsForm(request.POST, instance=self.get_object())
+            
+            if humidity_settings_form.is_valid():
+                humidity_settings_form.save()
+            else:
+                context['humidity_settings_form'] = humidity_settings_form
+                
+        if 'lightness_settings' in request.POST:
+            lightness_settings_form = LightnessSettingsForm(request.POST, instance=self.get_object())
+            
+            if lightness_settings_form.is_valid():
+                lightness_settings_form.save()
+            else:
+                context['lightness_settings_form'] = lightness_settings_form
+                
+        if 'move_checker_settings' in request.POST:
+            move_checker_settings_form = MoveCheckerSettingsForm(request.POST, instance=self.get_object())
+            
+            if move_checker_settings_form.is_valid():
+                move_checker_settings_form.save()
+            else:
+                context['move_checker_settings_form'] = move_checker_settings_form
+                
+        return render(request, self.template_name, self.get_context_data(**context))
+    
+    # form_class = SettingsForm
+    # success_url = '/'
+    
+    # def get_form_class(self):
+    #     form_class = super().get_form_class()
+    #     print(form_class.fields)
+    #     return form_class
     
 def home_page(request):
     last_temperature = Temperature.objects.latest('date_time')

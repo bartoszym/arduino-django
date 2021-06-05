@@ -1,16 +1,124 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block header %}
-<div class="jumbotron" style="padding: 2%; margin: 10px;">
-    <h1 class="display-6">{% trans 'Settings' %}</h1>
+<div class="jumbotron" style="padding: 2%; margin: 5px;">
+    <h1 class="display-4">{% trans 'Settings' %}</h1>
 </div>
 {% endblock header %}
 {% block content %}
-<form method="post">{% csrf_token %}
-    {% for field in form %}
-    {{ field.label_tag }} {{ field }}<br>
-    {{ hour_form.as_p }}
-    {% endfor %}
-    <button type="submit" class="btn btn-primary" name="see_charts">{% trans 'Update' %}</button>
-</form>
+<div class="container-fluid " style="display: inline-flex; height: 24em;">
+    <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+        <h1 class="display-4">{% trans 'Temperature' %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>{{ temperature_settings_form.auto_update_temperature.label }}: {{ temperature_settings_form.auto_update_temperature }}</p>
+            <div id='temperature-settings'>
+            <p>{{ temperature_settings_form.update_temperature_time1.label }}: {{ temperature_settings_form.update_temperature_time1 }}</p>
+            <p>{{ temperature_settings_form.update_temperature_time2.label }}: {{ temperature_settings_form.update_temperature_time2 }}</p>
+            <p>{{ temperature_settings_form.update_temperature_time3.label }}: {{ temperature_settings_form.update_temperature_time3 }}</p>
+            </div>
+            <button type="submit" name="temperature_settings" class="btn btn-primary">{% trans 'Update' %}</button>
+        </form>
+    </div>
+    <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+        <h1 class="display-4">{% trans 'Humidity' %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>{{ humidity_settings_form.auto_update_humidity.label }}: {{ humidity_settings_form.auto_update_humidity }}</p>
+            <div id='humidity-settings'>
+            <p>{{ humidity_settings_form.update_humidity_time1.label }}: {{ humidity_settings_form.update_humidity_time1 }}</p>
+            <p>{{ humidity_settings_form.update_humidity_time2.label }}: {{ humidity_settings_form.update_humidity_time2 }}</p>
+            <p>{{ humidity_settings_form.update_humidity_time3.label }}: {{ humidity_settings_form.update_humidity_time3 }}</p>
+            </div>
+            <button type="submit" name="humidity_settings" class="btn btn-primary">{% trans 'Update' %}</button>
+        </form>
+    </div>
+</div>
+<div class="container-fluid " style="display: inline-flex; height: 24em;">
+    <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+        <h1 class="display-4">{% trans 'Lightness' %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>{{ lightness_settings_form.auto_update_lightness.label }}: {{ lightness_settings_form.auto_update_lightness }}</p>
+            <div id='lightness-settings'>
+            <p>{{ lightness_settings_form.update_lightness_time1.label }}: {{ lightness_settings_form.update_lightness_time1 }}</p>
+            <p>{{ lightness_settings_form.update_lightness_time2.label }}: {{ lightness_settings_form.update_lightness_time2 }}</p>
+            <p>{{ lightness_settings_form.update_lightness_time3.label }}: {{ lightness_settings_form.update_lightness_time3 }}</p>
+            </div>
+            <button type="submit" name="lightness_settings" class="btn btn-primary">{% trans 'Update' %}</button>
+        </form>
+    </div>
+    <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+        <h1 class="display-4">{% trans 'Motion detector' %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>{{ move_checker_settings_form.move_checker_beeper.label }}: {{ move_checker_settings_form.move_checker_beeper }}</p>
+            <div id='move-time-settings'>
+            <p>{{ move_checker_settings_form.move_checker_time.label }}: {{ move_checker_settings_form.move_checker_time }}</p>
+            </div>
+            <p>{{ move_checker_settings_form.move_checker_email.label }}: {{ move_checker_settings_form.move_checker_email }}</p>
+            <div id='move-mail-settings'>
+            <p>{{ move_checker_settings_form.user_email.label }}: {{ move_checker_settings_form.user_email }}</p>
+            </div>
+            <button type="submit" name="move_checker_settings" class="btn btn-primary">{% trans 'Update' %}</button>
+        </form>
+    </div>
+</div>
+<script>
+    var checkbox_temp = document.getElementById('id_auto_update_temperature');
+    var delivery_div_temp = document.getElementById('temperature-settings');
+    var showHiddenDivTemp = function(){
+       if(checkbox_temp.checked) {
+         delivery_div_temp.style['display'] = 'block';
+       } else {
+         delivery_div_temp.style['display'] = 'none';
+       } 
+    }
+    var checkbox_hum = document.getElementById('id_auto_update_humidity');
+    var delivery_div_hum = document.getElementById('humidity-settings');
+    var showHiddenDivHum = function(){
+       if(checkbox_hum.checked) {
+         delivery_div_hum.style['display'] = 'block';
+       } else {
+         delivery_div_hum.style['display'] = 'none';
+       } 
+    }
+    var checkbox_light = document.getElementById('id_auto_update_lightness');
+    var delivery_div_light = document.getElementById('lightness-settings');
+    var showHiddenDivLight = function(){
+       if(checkbox_light.checked) {
+         delivery_div_light.style['display'] = 'block';
+       } else {
+         delivery_div_light.style['display'] = 'none';
+       } 
+    }
+    var checkbox_move_time = document.getElementById('id_move_checker_beeper');
+    var delivery_div_time = document.getElementById('move-time-settings');
+    var showHiddenDivTime = function(){
+       if(checkbox_move_time.checked) {
+         delivery_div_time.style['display'] = 'block';
+       } else {
+         delivery_div_time.style['display'] = 'none';
+       } 
+    }
+    var checkbox_move_mail = document.getElementById('id_move_checker_email');
+    var delivery_div_mail = document.getElementById('move-mail-settings');
+    var showHiddenDivMail = function(){
+       if(checkbox_move_mail.checked) {
+         delivery_div_mail.style['display'] = 'block';
+       } else {
+         delivery_div_mail.style['display'] = 'none';
+       } 
+    }
+    checkbox_temp.onclick = showHiddenDivTemp;
+    showHiddenDivTemp();
+    checkbox_hum.onclick = showHiddenDivHum;
+    showHiddenDivHum();
+    checkbox_light.onclick = showHiddenDivLight;
+    showHiddenDivLight();
+    checkbox_move_time.onclick = showHiddenDivTime;
+    showHiddenDivTime();
+    checkbox_move_mail.onclick = showHiddenDivMail;
+    showHiddenDivMail();
+    </script>
 {% endblock %}

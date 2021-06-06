@@ -6,10 +6,12 @@
 </div>
 {% endblock header %}
 {% block content %}
-<div class="container-fluid " style="display: inline-flex; height: 24em;">
+<font size="+2">
+<div class="container-fluid " style="display: inline-flex; height: 17em;">
     <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
         <h1 class="display-4">{% trans 'Temperature' %}</h1>
         <form method="post">
+          
             {% csrf_token %}
             <p>{{ temperature_settings_form.auto_update_temperature.label }}: {{ temperature_settings_form.auto_update_temperature }}</p>
             <div id='temperature-settings'>
@@ -34,7 +36,7 @@
         </form>
     </div>
 </div>
-<div class="container-fluid " style="display: inline-flex; height: 24em;">
+<div class="container-fluid " style="display: inline-flex; height: 17em;">
     <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
         <h1 class="display-4">{% trans 'Lightness' %}</h1>
         <form method="post">
@@ -64,6 +66,7 @@
         </form>
     </div>
 </div>
+</font>
 <script>
     var checkbox_temp = document.getElementById('id_auto_update_temperature');
     var delivery_div_temp = document.getElementById('temperature-settings');

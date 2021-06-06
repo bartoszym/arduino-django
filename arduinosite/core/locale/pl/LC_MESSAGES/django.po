@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 18:58+0200\n"
+"POT-Creation-Date: 2021-06-06 12:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,29 +20,57 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: models.py:8
+#: forms.py:45
+msgid "Bad value, enter it again!"
+msgstr "Zła wartość, wprowadź ponownie"
+
+#: models.py:9
 msgid "Automatic update of temperature"
 msgstr "Automatyczna aktualizacja temperatury"
 
-#: models.py:9 models.py:10 models.py:11
+#: models.py:10 models.py:11 models.py:12
 msgid "Update time of temperature"
 msgstr "Godzina aktualizacji temperatury"
 
-#: models.py:13
+#: models.py:14
 msgid "Automatic update of humidity"
 msgstr "Automatyczna aktualizacja wilgotności"
 
-#: models.py:14 models.py:15 models.py:16
+#: models.py:15 models.py:16 models.py:17
 msgid "Update time of humidity"
 msgstr "Godzina aktualizacji wilgotności"
 
-#: models.py:18
+#: models.py:19
 msgid "Automatic update of lightness"
 msgstr "Automatyczna aktualizacja jasności"
 
-#: models.py:19 models.py:20 models.py:21
+#: models.py:20 models.py:21 models.py:22
 msgid "Update time of lightness"
 msgstr "Godzina aktualizacji jasności"
+
+#: models.py:24
+msgid "Should Arduino beep when something is moving"
+msgstr "Włącz dźwięk gdy wykryty zostanie ruch"
+
+#: models.py:25
+msgid "Should e-mail be send when something is moving"
+msgstr "Wyślij e-mail gdy wykryty zostanie ruch"
+
+#: models.py:26
+msgid "E-mail on which message will be sent"
+msgstr "E-mail na który zostanie wysłana wiadomość"
+
+#: models.py:29
+msgid ""
+"In which hours motion detector should be on.Values has to be in format hh:mm-"
+"hh:mm, divided by commas, f.e. 13:40-15:60"
+msgstr ""
+"Godziny w jakich czujnik ruchu jest włączony. Muszą być w formacie hh:mm-hh:"
+"mm, oddzielone przecinkami, np. 13:40-15:50"
+
+#: models.py:31
+msgid "Hours in which move detection is on"
+msgstr "Godziny w jakich czujnik ruchu jest włączony"
 
 #: templates/base.html:10
 msgid "Control your Home"
@@ -149,10 +177,27 @@ msgstr "Rejestracja"
 msgid "Sign up"
 msgstr "Zarejestruj się"
 
-#: templates/settings_form.html:14
+#: templates/settings_form.html:12
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: templates/settings_form.html:22 templates/settings_form.html:35
+#: templates/settings_form.html:50 templates/settings_form.html:65
 msgid "Update"
 msgstr "Zaktualizuj"
 
-#: views.py:48 views.py:53 views.py:58
+#: templates/settings_form.html:26
+msgid "Humidity"
+msgstr "Wilgotność"
+
+#: templates/settings_form.html:41
+msgid "Lightness"
+msgstr "Jasność"
+
+#: templates/settings_form.html:54
+msgid "Motion detector"
+msgstr "Czujnik ruchu"
+
+#: views.py:111 views.py:116 views.py:121
 msgid "Arduino is not working, check if it's turned on!"
 msgstr "Arduino nie działa, sprawdź czy jest włączone!"

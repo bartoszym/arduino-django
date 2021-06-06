@@ -23,8 +23,9 @@ class Settings(models.Model):
     
     move_checker_beeper = models.BooleanField(default=False, verbose_name=_('Should Arduino beep when something is moving'))
     move_checker_email = models.BooleanField(default=False, verbose_name=_('Should e-mail be send when something is moving'))
-    user_email = models.EmailField(null=True, blank=True)
+    user_email = models.EmailField(null=True, blank=True, verbose_name=_('E-mail on which message will be sent'))
     move_checker_time = models.CharField(
         blank=True, null=True, max_length=100,
         help_text=_('In which hours motion detector should be on.'
-                    'Values has to be in format hh:mm-hh:mm, divided by commas, f.e. 13:40-15:60'))
+                    'Values has to be in format hh:mm-hh:mm, divided by commas, f.e. 13:40-15:60'),
+        verbose_name=_('Hours in which move detection is on'))

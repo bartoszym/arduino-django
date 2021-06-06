@@ -39,8 +39,8 @@
 {% endblock header %}
 {% block content %}
 <div>
-    <div class="container-fluid " style="display: inline-flex;">
-        <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
+    <div class="container-fluid" style="display: inline-flex;">
+        <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded">
             <h1 class="display-3">{% trans 'Last temperature' %}</h1>
             <h1 class="display-3">
                 {% if last_temperature.value >= 20 %}
@@ -70,7 +70,7 @@
             {% endif %}
         </div>
 
-        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
+        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded">
             <h1 class="display-3">{% trans 'Last humidity' %}</h1>
             <h1 class="display-3">
                 {% bs_icon 'moisture' size='1em' %}
@@ -96,7 +96,7 @@
             {% endif %}
         </div>
 
-        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded" >
+        <div class="jumbotron jumbotron-fluid col-md-4 m-1 text-center rounded">
             <h1 class="display-3">{% trans 'Last lightness' %}</h1>
             <h1 class="display-3">
                 {% if last_lightness.value >= 100 %}

@@ -1,0 +1,19 @@
+/* a#dim-green {
+    background-color: aqua;
+}*/
+
+
+/*
+#light-green {
+    background-color: #D7F9Fa;
+}*/
+
+/* #sand {
+    background-color: #EAE7D6;
+} */
+nav[class^="navbar"] {
+    background-color: darkseagreen;
+}
+div[class^="jumbotron"]{
+    background-color: #EAE7D6;
+}

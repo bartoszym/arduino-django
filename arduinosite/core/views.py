@@ -1,24 +1,24 @@
-from typing import Set
-from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import UpdateView, View
+from django.views.generic import View
 
 from .forms import *
 from datetime import datetime
 
 from .models import Settings
 from data.models import Temperature, Humidity, Lightness
+from data.utils import display_message
+
 
 class SettingsView(LoginRequiredMixin, View):
     template_name = 'settings_form.html'
     
     def get_object(self):
         try:
-            object = Settings.objects.get(pk=1)
+            object, created = Settings.objects.get_or_create(pk=1)
         except Settings.DoesNotExist:
             raise Http404('Settings not found')
         
@@ -76,14 +76,7 @@ class SettingsView(LoginRequiredMixin, View):
                 context['move_checker_settings_form'] = move_checker_settings_form
                 
         return render(request, self.template_name, self.get_context_data(**context))
-    
-    # form_class = SettingsForm
-    # success_url = '/'
-    
-    # def get_form_class(self):
-    #     form_class = super().get_form_class()
-    #     print(form_class.fields)
-    #     return form_class
+
     
 def home_page(request):
     last_temperature = Temperature.objects.latest('date_time')
@@ -92,8 +85,8 @@ def home_page(request):
     temperature_week_average = Temperature.objects.get_last_week_average()
     humidity_week_average = Humidity.objects.get_last_week_average()
     lightness_week_average = Lightness.objects.get_last_week_average()
-    current_date = datetime.utcnow()
-    current_hour = datetime.utcnow().hour
+    current_date = datetime.now()
+    current_hour = datetime.now().hour
     context = {
         'last_temperature': last_temperature,
         'current_hour': current_hour,
@@ -106,19 +99,12 @@ def home_page(request):
         }
     return render(request, 'home.html', context)
 
-def get_temperature(request):
-    if Temperature.get_temperature() == False:
-        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
-    return redirect('core:home')
-
-def get_humidity(request):
-    if Humidity.get_humidity() == False:
-        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
-    return redirect('core:home')
-
-def get_lightness(request):
-    if Lightness.get_lightness() == False:
-        messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
+def get_data(request, **kwargs):
+    model = kwargs['model']
+    status = model.get_data()
+    if status:
+        display_message(status, request)
+    
     return redirect('core:home')
 
 def register(request):

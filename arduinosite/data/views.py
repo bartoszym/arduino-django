@@ -3,17 +3,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.functions import ExtractDay
 from django.db.models import Sum
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, DeleteView
 
-from calendar import month, monthrange
+from calendar import monthrange
 from datetime import datetime
 
 from .forms import MonthForm
 from .models import Temperature, Humidity, Lightness
+from .utils import display_message
 
 
 class TemperatureListView(LoginRequiredMixin, ListView):
@@ -22,8 +23,9 @@ class TemperatureListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_temp') is not None:
-            if self.model.get_temperature() == False:
-                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
+            status = self.model.get_data()
+            if status:
+                display_message(status, request)
         elif request.POST.get('see_charts') is not None:
             return redirect('data:temperature-chart')
         return HttpResponseRedirect(self.request.path)
@@ -39,8 +41,9 @@ class HumidityListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_hum') is not None:
-            if self.model.get_humidity() == False:
-                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
+            status = self.model.get_data()
+            if status:
+                display_message(status, request)
         elif request.POST.get('see_charts') is not None:
             return redirect('data:humidity-chart')
         return HttpResponseRedirect(self.request.path)
@@ -56,8 +59,9 @@ class LightnessListView(LoginRequiredMixin, ListView):
     
     def post(self, request, *args, **kwargs):
         if request.POST.get('get_light') is not None:
-            if self.model.get_lightness() == False:
-                messages.add_message(request, messages.ERROR, _('Arduino is not working, check if it\'s turned on!'))
+            status = self.model.get_data()
+            if status:
+                display_message(status, request)
         elif request.POST.get('see_charts') is not None:
             return redirect('data:lightness-chart')
         return HttpResponseRedirect(self.request.path)
@@ -67,7 +71,7 @@ class LightnessDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'data/data_object_delete.html'
     success_url = reverse_lazy('data:lightness-list')
 
-def create_form(request):
+def month_form(request):
     chosen_month = datetime.today().month
     if request.method == 'POST':
         form = MonthForm(request.POST, initial={'month': chosen_month})
@@ -94,46 +98,16 @@ def create_chart_data(queryset):
     return chart_dict
 
 @login_required
-def temperature_chart(request):
-    form, chosen_month = create_form(request)
+def chart(request, **kwargs):
+    model_to_show = kwargs['model']
+    form, chosen_month = month_form(request)
+    now = datetime.now()
     
-    temperatures_current_month = Temperature.objects.filter(
-        date_time__month=chosen_month
+    data_current_month = model_to_show.objects.filter(
+        date_time__month=chosen_month, date_time__year=now.year
         ).annotate(day=ExtractDay('date_time')).values('day', 'value')
     
-    chart_dict = create_chart_data(temperatures_current_month)
-    
-    return render(request, 'data/chart.html', {
-        'labels': list(chart_dict.keys()),
-        'data': list(chart_dict.values()),
-        'form': form,
-    })
-
-@login_required
-def humidity_chart(request):
-    form, chosen_month = create_form(request)
-    
-    humidities_current_month = Humidity.objects.filter(
-        date_time__month=chosen_month
-        ).annotate(day=ExtractDay('date_time')).values('day', 'value')
-    
-    chart_dict = create_chart_data(humidities_current_month)
-    
-    return render(request, 'data/chart.html', {
-        'labels': list(chart_dict.keys()),
-        'data': list(chart_dict.values()),
-        'form': form,
-    })
-
-@login_required
-def lightness_chart(request):
-    form, chosen_month = create_form(request)
-    
-    lightnesses_current_month = Lightness.objects.filter(
-        date_time__month=chosen_month
-        ).annotate(day=ExtractDay('date_time')).values('day', 'value')
-    
-    chart_dict = create_chart_data(lightnesses_current_month)
+    chart_dict = create_chart_data(data_current_month)
     
     return render(request, 'data/chart.html', {
         'labels': list(chart_dict.keys()),

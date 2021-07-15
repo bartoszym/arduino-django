@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 18:59+0200\n"
+"POT-Creation-Date: 2021-07-15 18:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,6 +72,18 @@ msgstr "Grudzień"
 msgid "Choose month"
 msgstr "Wybierz miesiąc"
 
+#: models.py:53
+msgid "Temperature {} day {} at {}"
+msgstr "Temperatura {} dnia {} o godzinie {}"
+
+#: models.py:63
+msgid "Humidity {} day {} at {}"
+msgstr "Wilgotność {} dnia {} o godzinie {}"
+
+#: models.py:76
+msgid "Lightness {} day {} at {}"
+msgstr "Jasność {} dnia {} o godzinie {}"
+
 #: templates/data/chart.html:7 templates/data/temperature_list.html:6
 msgid "Temperatures"
 msgstr "Temperatury"
@@ -97,12 +109,12 @@ msgid "humidity"
 msgstr "wilgotność"
 
 #: templates/data/humidity_list.html:15 templates/data/lightness_list.html:15
-#: templates/data/temperature_list.html:15
+#: templates/data/temperature_list.html:16
 msgid "day"
 msgstr "dzień"
 
 #: templates/data/humidity_list.html:16 templates/data/lightness_list.html:16
-#: templates/data/temperature_list.html:16
+#: templates/data/temperature_list.html:17
 msgid "time"
 msgstr "czas"
 
@@ -111,7 +123,7 @@ msgid "Get current humidity"
 msgstr "Pobierz aktualną wilgotność"
 
 #: templates/data/humidity_list.html:23 templates/data/lightness_list.html:23
-#: templates/data/temperature_list.html:23
+#: templates/data/temperature_list.html:24
 msgid "See charts"
 msgstr "Pokaż wykresy"
 
@@ -123,11 +135,11 @@ msgstr "jasność"
 msgid "Get current lightness"
 msgstr "Pobierz aktualną jasność"
 
-#: templates/data/temperature_list.html:14
+#: templates/data/temperature_list.html:15
 msgid "temperature"
 msgstr "temperatura"
 
-#: templates/data/temperature_list.html:22
+#: templates/data/temperature_list.html:23
 msgid "Get current temperature"
 msgstr "Pobierz aktualną temperaturę"
 
@@ -138,3 +150,24 @@ msgstr "Usuń"
 #: views.py:26 views.py:43 views.py:60
 msgid "Arduino is not working, check if it's turned on!"
 msgstr "Arduino nie działa, sprawdź czy jest włączone!"
+
+#~ msgid ""
+#~ "Humidity {self.value} day {self.date_time.date()} at {self.date_time."
+#~ "time()}"
+#~ msgstr ""
+#~ "Wilgotność {self.value} dnia {self.date_time.date()} o godzinie {self."
+#~ "date_time.time()}"
+
+#~ msgid ""
+#~ "Lightness {self.value} day {self.date_time.date()} at {self.date_time."
+#~ "time()}"
+#~ msgstr ""
+#~ "Jasność {self.value} dnia {self.date_time.date()} o godzinie {self."
+#~ "date_time.time()}"
+
+#~ msgid ""
+#~ "Temperature {self.value} day {self.date_time.date()} at {self.date_time."
+#~ "time()}"
+#~ msgstr ""
+#~ "Temperatura {self.value} dnia {self.date_time.date()} o godzinie {self."
+#~ "date_time.time()}"

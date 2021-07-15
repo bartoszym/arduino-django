@@ -10,9 +10,9 @@
     {% for object in object_list %}
     <tr>
         <p><th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
-        <td><font size="+2">{{ object.value }} </font></td>
-        <td><font size="+2">{{ object.date_time.date|date:"d M Y" }}</font></td>
-        <td><font size="+2">{{ object.date_time.time|date:"G:i" }}</font></td>
+        <td>{{ object.value }} </td>
+        <td>{{ object.date_time.date|date:"d M Y" }}</td>
+        <td>{{ object.date_time.time|date:"G:i" }}</td>
         <td>
             {% if 'temperatures' in request.path %}
             <a href="{% url 'data:temperature-delete' object.id %}">

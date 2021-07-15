@@ -36,7 +36,7 @@
         </form>
     </div>
 </div>
-<div class="container-fluid " style="display: inline-flex; height: 17em;">
+<div class="container-fluid " style="display: inline-flex; height: 21em;">
     <div class="jumbotron jumbotron-fluid w-50 m-1 text-center rounded" >
         <h1 class="display-4">{% trans 'Lightness' %}</h1>
         <form method="post">
@@ -56,7 +56,14 @@
             {% csrf_token %}
             <p>{{ move_checker_settings_form.move_checker_beeper.label }}: {{ move_checker_settings_form.move_checker_beeper }}</p>
             <div id='move-time-settings'>
-            <p>{{ move_checker_settings_form.move_checker_time.label }}: {{ move_checker_settings_form.move_checker_time }}</p>
+            <p>
+              {{ move_checker_settings_form.move_checker_time.label }}: {{ move_checker_settings_form.move_checker_time }}<br>
+              {{ move_checker_settings_form.move_checker_time.help_text }}
+            </p>
+            
+            {% for error in move_checker_settings_form.move_checker_time.errors %}
+            <p style="color: red;">{{ error }}</p>
+            {% endfor %}
             </div>
             <p>{{ move_checker_settings_form.move_checker_email.label }}: {{ move_checker_settings_form.move_checker_email }}</p>
             <div id='move-mail-settings'>

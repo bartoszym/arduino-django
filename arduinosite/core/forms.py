@@ -40,8 +40,22 @@ class MoveCheckerSettingsForm(forms.ModelForm):
         move_checker_time = self.cleaned_data['move_checker_time']
         if move_checker_time is None:
             return move_checker_time
-        times = re.findall(r'([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9]', move_checker_time)
+        times = re.findall(r'^(([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9](,|))*$', move_checker_time)
         if not times:
             raise ValidationError(_('Bad value, enter it again!'))
-        print(times)
+        times_splitted = move_checker_time.split(',')
+        if len(times_splitted) > 2:
+            raise ValidationError(_("You can enter up to 2 different ranges!"))
+        for i in times_splitted:
+            first, second = i.split('-')
+            first_hour, first_minutes = first.split(':')
+            second_hour, second_minutes = second.split(':')
+            first_hour, first_minutes, second_hour, second_minutes = int(first_hour), int(first_minutes), int(second_hour), int(second_minutes)
+            print(first_hour, second_hour)
+            print(first_minutes, second_minutes)
+            if first_hour > second_hour:
+                raise ValidationError(_('Bad value, enter it again!'))
+            if first_hour == second_hour and second_minutes < first_minutes:
+                raise ValidationError(_('Bad value, enter it again!'))
+            
         return move_checker_time

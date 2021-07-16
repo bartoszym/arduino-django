@@ -35,7 +35,7 @@ class UpdateTemperatureCron(CronJobBase):
     code = 'core.UpdateTemperatureCron'
     
     def do(self):
-        Temperature.get_temperature()
+        Temperature.get_data()
         return
 
 
@@ -62,7 +62,7 @@ class UpdateHumidityCron(CronJobBase):
     code = 'core.UpdateHumidityCron'
     
     def do(self):
-        Humidity.get_humidity()
+        Humidity.get_data()
         return
     
     
@@ -89,7 +89,7 @@ class UpdateLightnessCron(CronJobBase):
     code = 'core.UpdateLightnessCron'
     
     def do(self):
-        Lightness.get_lightness()
+        Lightness.get_data()
         return
     
     

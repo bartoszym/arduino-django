@@ -79,9 +79,18 @@ class SettingsView(LoginRequiredMixin, View):
 
     
 def home_page(request):
-    last_temperature = Temperature.objects.latest('date_time')
-    last_humidity = Humidity.objects.latest('date_time')
-    last_lightness = Lightness.objects.latest('date_time')
+    try:
+        last_temperature = Temperature.objects.latest('date_time')
+    except Temperature.DoesNotExist:
+        last_temperature = 0
+    try:
+        last_humidity = Humidity.objects.latest('date_time')
+    except Humidity.DoesNotExist:
+        last_humidity = 0
+    try:    
+        last_lightness = Lightness.objects.latest('date_time')
+    except Lightness.DoesNotExist:
+        last_lightness = 0
     temperature_week_average = Temperature.objects.get_last_week_average()
     humidity_week_average = Humidity.objects.get_last_week_average()
     lightness_week_average = Lightness.objects.get_last_week_average()
